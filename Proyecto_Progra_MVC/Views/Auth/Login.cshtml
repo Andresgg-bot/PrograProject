@@ -1,0 +1,47 @@
+﻿@model LoginViewModel
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>Login</h1>
+        <hr />
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="InputModel.Email"></label>
+                <input asp-for="InputModel.Email" class="form-control" />
+                <span asp-validation-for="InputModel.Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="InputModel.Password"></label>
+                <input asp-for="InputModel.Password" class="form-control" />
+                <span asp-validation-for="InputModel.Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="hidden" asp-for="SiteKey" />
+                <input type="hidden" asp-for="Recaptcha" />
+                <div class="g-recaptcha" data-callback="OnCallback" data-sitekey="@Model.SiteKey"></div>
+            </div>
+
+            <div class="form-group inputs">
+                <a asp-action="forgetpassword">Forgot password?</a>
+                <br />
+                <br />
+                <button type="submit" class="btn btn-primary">Sign up</button>
+                <br />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+    {
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        var OnCallback = function() {
+            $("#Recaptcha").val(grecaptcha.getResponse());
+        }
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}

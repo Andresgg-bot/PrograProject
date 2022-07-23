@@ -1,0 +1,35 @@
+﻿@model User
+
+<div>
+    <div class="row mb-2">
+        <div class="col-md-10">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <label asp-for="@Model.Name" class="form-text"></label>
+                    <strong class="d-inline-block mb-2 text-primary">@Model.Name</strong>
+                    
+                    <label asp-for="@Model.Age" class="form-text"></label>
+                    <strong class="d-inline-block mb-2 text-primary">@Model.Age</strong>
+
+                    <label asp-for="@Model.PhysicalActivity" class="form-text"></label>
+                    <strong class="d-inline-block mb-2 text-primary">@Model.PhysicalActivity</strong>
+
+                    <label asp-for="@Model.Genero" class="form-text"></label>
+                    <strong class="d-inline-block mb-2 text-primary">@Model.Genero</strong>
+
+                    <label asp-for="@Model.Email" class="form-text"></label>
+                    <strong class="d-inline-block mb-2 text-primary">@Model.Email</strong>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button type="button" class="btn btn-outline-danger" onclick="goBack()">Go Back</button>
+
+<script>
+function goBack() {
+    history.back()
+}
+</script>
