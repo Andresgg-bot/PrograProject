@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Proyecto_Progra_MVC.DataAccess.Data;
+/*using Proyecto_Progra_MVC.DataAccess.Data;
 using Proyecto_Progra_MVC.DataAccess.Repository;
 using Proyecto_Progra_MVC.DataAccess.Repository.UnityOfWork;
-using Proyecto_Progra_MVC.Models.DataModels;
+using Proyecto_Progra_MVC.Models.DataModels;*/
 
 namespace Proyecto_Progra_MVC.Controllers
 {
     public class UserController : Controller
     {
 
-        public UserController(IUnitOfWork<ApplicationDbContext> unitOfWork)
+        /*public UserController(IUnitOfWork<ApplicationDbContext> unitOfWork)
         {
             UnitOfWork = unitOfWork;
             Repository = UnitOfWork.Repository<User>();
@@ -31,6 +31,6 @@ namespace Proyecto_Progra_MVC.Controllers
                 return NotFound();
             }
             return View(user);
-        }
+        }*/
     }
 }

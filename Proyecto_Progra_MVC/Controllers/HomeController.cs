@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Proyecto_Progra_MVC.Models;
+using Proyecto_Progra_MVC.Domain.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

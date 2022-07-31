@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.Options;
-using Proyecto_Progra_MVC.Contracts;
+using Proyecto_Progra_MVC.Application.Contracts.Managers;
 using Proyecto_Progra_MVC.Domain.Models.ConfigurationModels;
 using Proyecto_Progra_MVC.Domain.Models.PlainModels;
 using System;
 using System.Net;
 using System.Text.Json;
 
-namespace Proyecto_Progra_MVC.Components
+namespace Proyecto_Progra_MVC.Application.Managers
 {
     public class RecaptchaValidator : IRecaptchaValidator
     {

@@ -1,4 +1,4 @@
-﻿@using Proyecto_Progra_MVC.Models.Enums
+﻿@using Proyecto_Progra_MVC.Domain.Models.Enum
 @model RegisterInputModel
 
 <style>
@@ -52,19 +52,27 @@
                 <input asp-for="Age" class="form-control" placeholder="Age" />
                 <span asp-validation-for="Age" class="text-danger"></span>
 
-                <label asp-for="Genero" class="form-text"></label>
-                @foreach (var genero in Enum.GetValues(typeof(Generos)))
+                <label asp-for="Gender" class="form-text"></label>
+                @foreach (var genero in Enum.GetValues(typeof(Genders)))
                 {
                     <label class="form-check form-check-inline">
-                        <input asp-for="Genero" type="radio" value="@((int)genero)"
+                        <input asp-for="Gender" type="radio" value="@((int)genero)"
                             class="form-check form-check-input" aria-describedby="ayudaGenero" />
-                        @Enum.GetName(typeof(Generos), genero)
+                        @Enum.GetName(typeof(Genders), genero)
                     </label>
                 }
-                <span asp-validation-for="Genero" class="text-danger"></span>
+                <span asp-validation-for="Gender" class="text-danger"></span>
 
                 <label asp-for="PhysicalActivity" class="form-text"></label>
-                <input asp-for="PhysicalActivity" class="form-control" placeholder="Physical Activity" />
+                @foreach (var physicalActivity in Enum.GetValues(typeof(PhysicalActivity)))
+                {
+                    <label class="form-check form-check-inline">
+                        <input asp-for="Gender" type="radio" value="@((int)physicalActivity)"
+                            class="form-check form-check-input" aria-describedby="ayudaPhysicalActivity" />
+                        @Enum.GetName(typeof(PhysicalActivity), physicalActivity)
+                    </label>
+                }
+                @*<input asp-for="PhysicalActivity" class="form-control" placeholder="Physical Activity" />*@
                 <span asp-validation-for="PhysicalActivity" class="text-danger"></span>
 
                 <label asp-for="Email" class="form-text"></label>
