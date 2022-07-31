@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Proyecto_Progra_MVC.Application;
+using Proyecto_Progra_MVC.Application.Contracts.Data;
 using Proyecto_Progra_MVC.Components;
 using Proyecto_Progra_MVC.Contracts;
-using Proyecto_Progra_MVC.DataAccess.Data;
-using Proyecto_Progra_MVC.DataAccess.Repositories;
-using Proyecto_Progra_MVC.DataAccess.Repository.UnityOfWork;
-using Proyecto_Progra_MVC.Models.ConfigurationModels;
-using Proyecto_Progra_MVC.Models.DataModels;
+using Proyecto_Progra_MVC.Domain.Models.ConfigurationModels;
+using Proyecto_Progra_MVC.Infraestructure;
+using Proyecto_Progra_MVC.Infraestructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +34,8 @@ namespace Proyecto_Progra_MVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.RegisterApplicationServices(Configuration);
+            services.RegisterInfraestructureServices(Configuration);
 
             services.AddAuthentication(options =>
             {
@@ -58,18 +60,8 @@ namespace Proyecto_Progra_MVC
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-            services.AddDbContext<ApplicationDbContext>
-                (options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")))
-                    .AddUnitOfWork<ApplicationDbContext>()
-                    .AddRepository<User, UsuarioRepository>();
-
-
-            services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>().AddTokenProvider<DataProtectorTokenProvider<User>>
-                    (TokenOptions.DefaultProvider);
-
-            services.AddScoped<IApplicationDbContext>
-                (options => options.GetService<ApplicationDbContext>());
+            /*services.AddScoped<IApplicationDbContext>
+                (options => options.GetService<ApplicationDbContext>());*/
 
             services.Configure<RecaptchaConfiguration>(Configuration.GetSection("RecaptchaConfiguration"));
 

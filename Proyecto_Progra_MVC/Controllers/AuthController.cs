@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Proyecto_Progra_MVC.Contracts;
-using Proyecto_Progra_MVC.Models.ConfigurationModels;
-using Proyecto_Progra_MVC.Models.DataModels;
-using Proyecto_Progra_MVC.Models.InputModels;
-using Proyecto_Progra_MVC.Models.ViewModels;
+using Proyecto_Progra_MVC.Domain.Models.ConfigurationModels;
+using Proyecto_Progra_MVC.Domain.Models.Entities;
+using Proyecto_Progra_MVC.Domain.Models.InputModels;
+using Proyecto_Progra_MVC.Domain.Models.ViewModels;
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -53,7 +53,7 @@ namespace Proyecto_Progra_MVC.Controllers
                     PhysicalActivity = model.PhysicalActivity,
                     UserName = model.Email,
                     Email = model.Email,
-                    Genero = model.Genero
+                    Gender = model.Gender
                 };
                 var result = await _userManager.CreateAsync(user, password: model.Password);
 

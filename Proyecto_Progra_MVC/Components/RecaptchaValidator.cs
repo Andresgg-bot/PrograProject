@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using Proyecto_Progra_MVC.Contracts;
-using Proyecto_Progra_MVC.Models.ConfigurationModels;
-using Proyecto_Progra_MVC.Models.PlainModels;
+using Proyecto_Progra_MVC.Domain.Models.ConfigurationModels;
+using Proyecto_Progra_MVC.Domain.Models.PlainModels;
 using System;
 using System.Net;
 using System.Text.Json;

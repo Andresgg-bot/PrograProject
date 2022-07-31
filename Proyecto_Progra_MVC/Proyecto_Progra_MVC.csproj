@@ -16,8 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Proyecto_Progra_MVC.DataAccess\Proyecto_Progra_MVC.DataAccess.csproj" />
-    <ProjectReference Include="..\Proyecto_Progra_MVC.Models\Proyecto_Progra_MVC.Models.csproj" />
+    <ProjectReference Include="..\Proyecto_Progra_MVC.Application\Proyecto_Progra_MVC.Application.csproj" />
+    <ProjectReference Include="..\Proyecto_Progra_MVC.Domain\Proyecto_Progra_MVC.Domain.csproj" />
+    <ProjectReference Include="..\Proyecto_Progra_MVC.Infraestructure\Proyecto_Progra_MVC.Infraestructure.csproj" />
   </ItemGroup>
 
 </Project>
