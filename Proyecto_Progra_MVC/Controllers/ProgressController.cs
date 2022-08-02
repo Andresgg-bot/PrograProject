@@ -2,62 +2,85 @@
 using Microsoft.AspNetCore.Mvc;
 using Proyecto_Progra_MVC.Domain.Models.Entities;
 using Proyecto_Progra_MVC.Domain.Models.ViewModels;
+using Proyecto_Progra_MVC.Infraestructure.Data;
+using Proyecto_Progra_MVC.Infraestructure.Repository;
+using Proyecto_Progra_MVC.Infraestructure.Repository.UnitOfWork;
 using System;
+using System.Linq;
 
 namespace Proyecto_Progra_MVC.Controllers
 {
     [Route("progress")]
     public class ProgressController : Controller
     {
-        public ProgressController(<Progress> userManager)
+        public ProgressController(IUnitOfWork<ApplicationDbContext> unitOfWork)
         {
-            _userManager = userManager;
+            UnitOfWork = unitOfWork;
+            Repository = UnitOfWork.Repository<Progress>();
         }
 
-        readonly <Progress> _userManager;
+        readonly IUnitOfWork<ApplicationDbContext> UnitOfWork;
+        readonly IRepository<Progress> Repository;
 
         public IActionResult Index()
         {
-            return View();
+            return View(Repository.Listar(ordemiento: o => o.OrderByDescending(e => e.Id)));
         }
 
 
-        [HttpGet]
-        [Route("register")]
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
+            Progress progress = new Progress();
+            if (id == null)
+            {
+                return View(progress);
+            }
 
-            return View();
+            progress = Repository.Obtener(id.GetValueOrDefault());
+            if (progress == null)
+            {
+                return NotFound();
+            }
+
+            return View(progress);
         }
 
         [HttpPost]
-        [Route("register")]
-        public async Task<IActionResult> Create(RegisterInputModel model)
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(Progress progress)
         {
             if (ModelState.IsValid)
             {
-                Progress progress = new()
+                if (progress.Id == 0)
                 {
-                    Id = model.Id,
-                    Weight = model.Weight,
-                    Height = model.Height,
-                    BMI = model.BMI,
-                    IdUser = model.IdUser
-                };
-
-                var result = await .CreateAsync(progress);
-
-                if (result.Succeeded)
-                {
-                    await .SignInAsync(progress, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    Repository.Insertar(progress);
                 }
-                foreach (var error in result.Errors)
+                else
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    Repository.Actualizar(progress);
                 }
+
+                UnitOfWork.Guardar();
+                return RedirectToAction(nameof(Index));
             }
-            return View(model);
+
+            return View(progress);
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var progress = Repository.Obtener(id);
+
+            if (progress == null)
+            {
+                return Json(new { success = false, message = $"No se encuentra el progreso con id {id}" });
+            }
+
+            Repository.Borrar(progress);
+            UnitOfWork.Guardar();
+
+            return Json(new { success = true, message = "Progreso borrado exitosamente." });
         }
     }
 }
