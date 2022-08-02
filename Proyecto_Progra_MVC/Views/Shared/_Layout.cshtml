@@ -72,6 +72,12 @@
                                             </button>
                                         </form>
                                     </li>
+                                    @if (User.IsInRole("Administrators"))
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-controller="Administration" asp-action="Index">Administration</a>
+                                        </li>
+                                    }
                                 }
 
                             </ul>

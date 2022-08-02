@@ -37,26 +37,46 @@ namespace Proyecto_Progra_MVC
             services.RegisterApplicationServices(Configuration);
             services.RegisterInfraestructureServices(Configuration);
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            }).AddCookie(options =>
-            {
-                options.LoginPath = "/accounts/login";
-                options.LogoutPath = "/accounts/logout";
-                options.AccessDeniedPath = "/accounts/accessdenied";
-                options.Cookie.SameSite = SameSiteMode.Lax;
-            });
+            services.AddAuthentication
+                (
+                    options =>
+                    {
+                        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    }
+                )
+                .AddCookie
+                    (
+                        options =>
+                        {
+                            options.LoginPath = "/accounts/login";
+                            options.LogoutPath = "/accounts/logout";
+                            options.AccessDeniedPath = "/accounts/accessdenied";
+                            options.Cookie.SameSite = SameSiteMode.Lax;
+                        }
+                     )
+              .AddGoogle
+                    (
+                        options =>
+                        {
+                            options.ClientId =
+                                Configuration.GetValue<string>("GoogleAuthenticationConfiguration:ClientId");
+                            options.ClientSecret =
+                                Configuration.GetValue<string>("GoogleAuthenticationConfiguration:ClientSecret");
+                        }
+                    );
 
-            services.Configure<IdentityOptions>(options =>
-            {
-                options.Password.RequiredLength = 8;
-                options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequireDigit = true;
-                options.Password.RequireUppercase = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequiredUniqueChars = 1;
-            });
+            services.Configure<IdentityOptions>
+                (
+                    options =>
+                    {
+                        options.Password.RequiredLength = 8;
+                        options.Password.RequireNonAlphanumeric = true;
+                        options.Password.RequireDigit = true;
+                        options.Password.RequireUppercase = true;
+                        options.Password.RequireLowercase = true;
+                        options.Password.RequiredUniqueChars = 1;
+                    }
+                );
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
@@ -91,9 +111,9 @@ namespace Proyecto_Progra_MVC
                 MinimumSameSitePolicy = SameSiteMode.Lax
             });
 
-            app.UseAuthentication();
-
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

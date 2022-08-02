@@ -25,7 +25,7 @@ namespace Proyecto_Progra_MVC.Infraestructure
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddTokenProvider<DataProtectorTokenProvider<User>>
-                (TokenOptions.DefaultProvider);
+                    (TokenOptions.DefaultProvider);
 
             return services;
         }
