@@ -10,7 +10,6 @@ using System.Linq;
 
 namespace Proyecto_Progra_MVC.Controllers
 {
-    [Route("progress")]
     public class ProgressController : Controller
     {
         public ProgressController(IUnitOfWork<ApplicationDbContext> unitOfWork)
