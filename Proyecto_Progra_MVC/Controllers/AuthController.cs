@@ -55,6 +55,7 @@ namespace Proyecto_Progra_MVC.Controllers
                     Email = model.Email,
                     Gender = model.Gender
                 };
+
                 var result = await _userManager.CreateAsync(user, password: model.Password);
 
                 if (result.Succeeded)

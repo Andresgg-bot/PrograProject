@@ -22,5 +22,7 @@ namespace Proyecto_Progra_MVC.Domain.Models.Entities
 
         [Display(Name = "Gender")]
         public Genders Gender { get; set; }
+
+        public List<Progress> Progress { get; set; }
     }
 }
