@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Inicio";
 }
 
 <!-- style css -->
@@ -12,10 +13,10 @@
                <div class="col-md-6">
                   <div class="text-bg">
                      <div class="padding_lert">
-                        <h1>GYM AND FITNESS</h1>
-                        <span>Landing Page 2019</span>
-                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it</p>
-                        <a class="read_more" href="#">Read More</a>
+                        <h1>Salud y Ejercicio</h1>
+                        <span>Este es el momento.</span>
+                        <p>Empieza ahora para llevar el control de tu peso y así poder avanzar en tu objetivo de salud.</p>
+                        <a class="read_more" href="#">Contáctenos</a>
                      </div>
                   </div>
                </div>
@@ -28,14 +29,14 @@
          </div>
 </section>
       <!-- end banner -->
-      <!-- features -->
+      <!-- RUTINAS -->
       <div class="Features">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
                   <div class="titlepage">
-                     <h2>Our Features Classes</h2>
-                     <span>CHECKOUT OUR FITNESS CLASSES</span>
+                     <h2>Nuestras Rutinas</h2>
+                     <span>Selecciona tu rutina ideal.</span>
                   </div>
                </div>
             </div>
@@ -43,37 +44,37 @@
                <div class="col-md-4">
                   <div class="Our_box">
                      <i><img src="icon/icon1.png" alt="#"/></i>
-                     <h4>HEAVY WEIGHT <br>CLASSES</h4>
+                     <h4>RUTINAS CON SOLO <br>MANCUERNAS</h4>
                   </div>
                </div>
                <div class="col-md-4">
                   <div class="Our_box">
                      <i><img src="icon/icon2.png" alt="#"/></i>
-                     <h4>BODY BUILDING <br>CLASSES</h4>
+                     <h4>RUTINAS DE <br>FISICOCULTURISMO</h4>
                   </div>
                </div>
                <div class="col-md-4">
                   <div class="Our_box">
                      <i><img src="icon/icon3.png" alt="#"/></i>
-                     <h4>WEIGHT LOSS <br>CLASSES</h4>
+                     <h4>RUTINAS DE <br>PERDIDA DE PESO</h4>
                   </div>
                </div>
                <div class="col-md-12">
-                  <a class="read_more" href="#">Read More</a>
+                  <a class="read_more" href="#">Leer más</a>
                </div>
             </div>
          </div>
       </div>
-      <!-- end Features -->
+      <!-- end RUTINAS -->
       <!-- discount -->
       <div class="discount">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
                   <div class="titlepage">
-                     <h2>FITNESS CLASSES THIS SUMMER. PAY NOW AND GET 25% DISCOUNT</h2>
-                     <span>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor a</span>
-                     <a class="read_more">Read More</a>
+                     <h2>CREA TU CUENTA AHORA TOTALMENTE GRÁTIS</h2>
+                     <span>Al crear tu cuenta puede llevar el control de tu peso y ver tu historial de avance.</span>
+                     <a class="read_more">Leer más</a>
                   </div>
                </div>
             </div>
@@ -86,29 +87,26 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="titlepage">
-                     <h2>Rqueste a call back</h2>
-                     <span>There are many variations of passages of Lorem Ipsum available, but the majority have suffered a</span>
+                     <h2>Contáctenos</h2>
+                     <span>Escríbenos para aclarar tus dudas y te estaremos contactando. </span>
                   </div>
                </div>
             </div>
             <div class="row">
                <div class="col-md-4">
-                  <form id="request" class="main_form">
+                  <form id="request" class="main_form" method="post">
                      <div class="row">
                         <div class="col-md-12 ">
-                           <input class="contactus" placeholder="Name" type="type" name="Name"> 
+                           <input asp-for="correoElectronico.Asunto" class="contactus" placeholder="Nombre" > 
                         </div>
                         <div class="col-md-12">
-                           <input class="contactus" placeholder=" Phone" type="type" name="Phone"> 
+                           <input asp-for="correoElectronico.Destinatario" class="contactus" placeholder=" Email" >                          
                         </div>
                         <div class="col-md-12">
-                           <input class="contactus" placeholder=" Email" type="type" name="Email">                          
-                        </div>
-                        <div class="col-md-12">
-                           <textarea class="textarea" placeholder="Message" type="type" Message="Name">Message </textarea>
+                           <textarea asp-for="correoElectronico.Cuerpo" class="textarea" placeholder="Mensaje" type="type" Message="Name">Mensaje </textarea>
                         </div>
                         <div class="col-sm-12">
-                           <button class="send_btn">Send</button>
+                           <button type="submit" class="send_btn">Enviar</button>
                         </div>
                      </div>
                   </form>
