@@ -86,6 +86,8 @@ namespace Proyecto_Progra_MVC
             services.Configure<RecaptchaConfiguration>(Configuration.GetSection("RecaptchaConfiguration"));
 
             services.AddSingleton<IRecaptchaValidator, RecaptchaValidator>();
+            services.AddSingleton<ICartero, Cartero>();
+            services.Configure<ConfiguracionSmtp>(Configuration.GetSection("ConfiguracionSmtp"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
