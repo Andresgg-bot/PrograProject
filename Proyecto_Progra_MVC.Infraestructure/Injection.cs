@@ -22,10 +22,11 @@ namespace Proyecto_Progra_MVC.Infraestructure
     {
         public static IServiceCollection RegisterInfraestructureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContextPool<ApplicationDbContext>
+            services.AddDbContext<ApplicationDbContext>
                 (options => options.UseSqlServer(configuration.GetConnectionString("ConnectionString")))
                     .AddUnitOfWork<ApplicationDbContext>()
-                    .AddRepository<Progress, ProgressRepository>();
+                    .AddRepository<Progress, ProgressRepository>()
+                    .AddRepository<Measures, MeasuresRepository>();
 
             services.AddScoped<IApplicationDbContext>
                 (options => options.GetService<ApplicationDbContext>());

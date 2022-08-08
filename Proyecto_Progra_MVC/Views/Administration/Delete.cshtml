@@ -26,7 +26,7 @@
             margin-bottom: 7px;
         }
 
-        .inputs #submit #cancel {
+        .inputs #submit #cancel{
             width: 50%;
             margin-top: 20px;
             padding: 15px 0;
@@ -39,7 +39,7 @@
         <form method="post">
             <div class="form-group header">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <h3>Role</h3>
+                <h3>Delete Role</h3>
             </div>
 
             <div class="form-group">
@@ -47,14 +47,20 @@
             </div>
 
             <div class="form-group inputs">
-                <input type="hidden" asp-for="Id" />
-
+                <input type="hidden" asp-for="Id"/>
                 <label asp-for="Name" class="form-text"></label>
-                <input asp-for="Name" class="form-control" placeholder="Name" autofocus />
+                <input asp-for="Name" class="form-control" placeholder="Name" autofocus readonly="readonly"/>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
 
-            <partial name="_CancelUpsertButtonsPartial" model="Model.Id" />
+            <div class="form-group inputs">
+                <a id="cancel" class="btn btn-outline-secondary" asp-action="index">
+                    <i class="fa-solid fa-ban"></i> Cancel
+                </a>
+                <button id="submit" type="submit" class="btn btn-outline-danger">
+                    <i class="fa-solid fa-trash"></i>Delete
+                </button>
+            </div>
 
         </form>
     </div>

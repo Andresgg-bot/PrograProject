@@ -58,14 +58,8 @@
                 </div>
             }
 
-            <div class="form-group inputs">
-                <a id="cancel" type="button" class="btn btn-outline-secondary" asp-action="index">
-                    <i class="fa-solid fa-ban"></i> Cancel
-                </a>
-                <button id="submit" type="submit" class="btn btn-outline-primary">
-                    <i class="fa-solid fa-floppy-disk"></i> Save
-                </button>
-            </div>
+            <partial name="_CancelUpsertButtonsPartial" model="Model.RoleId" />
+
         </form>
     </div>
 </div>

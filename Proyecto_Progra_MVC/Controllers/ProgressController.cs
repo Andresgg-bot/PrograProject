@@ -23,7 +23,7 @@ namespace Proyecto_Progra_MVC.Controllers
 
         public IActionResult Index()
         {
-            return View(Repository.Listar(ordemiento: o => o.OrderByDescending(e => e.Id)));
+            return View(Repository.Listar());
         }
 
 

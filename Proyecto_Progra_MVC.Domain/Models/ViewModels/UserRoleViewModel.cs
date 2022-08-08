@@ -13,7 +13,7 @@ namespace Proyecto_Progra_MVC.Domain.Models.ViewModels
         {
             Users = new List<UserRole>();
         }
-
+        public string RoleId { get; set; }
         public IList<UserRole> Users { get; set; }
     }
 }

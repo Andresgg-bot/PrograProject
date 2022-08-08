@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Proyecto_Progra_MVC.Application.Handlers;
 using Proyecto_Progra_MVC.Domain.Models.Entities;
 using Proyecto_Progra_MVC.Domain.Models.ViewModels;
 using System.Linq;
@@ -20,6 +22,7 @@ namespace Proyecto_Progra_MVC.Controllers
         readonly RoleManager<IdentityRole> _roleManager;
         readonly UserManager<User> _userManager;
 
+        [Authorize(Policy = PermissionTypesNames.VIEWROLES)]
         public IActionResult Index()
         {
             RoleViewModel model =
@@ -36,6 +39,7 @@ namespace Proyecto_Progra_MVC.Controllers
         [HttpGet]
         [Route("[action]")]
         [Route("[action]/{id}")]
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         public async Task<IActionResult> Upsert(string id = null)
         {
             Role role = new Role();
@@ -59,6 +63,7 @@ namespace Proyecto_Progra_MVC.Controllers
         [HttpPost]
         [Route("[action]")]
         [Route("[action]/{id}")]
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         public async Task<IActionResult> Upsert(Role model, string id = null)
         {
             if (ModelState.IsValid)
@@ -93,9 +98,14 @@ namespace Proyecto_Progra_MVC.Controllers
 
         [HttpGet]
         [Route("[action]/{id}")]
+        [Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
         public async Task<IActionResult> UsersRole(string id)
         {
-            UserRoleViewModel model = new UserRoleViewModel();
+            UserRoleViewModel model = 
+                new UserRoleViewModel
+                {
+                    RoleId = id
+                };
 
             if (string.IsNullOrEmpty(id))
             {
@@ -126,6 +136,7 @@ namespace Proyecto_Progra_MVC.Controllers
 
         [HttpPost]
         [Route("[action]/{id}")]
+        [Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
         public async Task<IActionResult> UsersRole(UserRoleViewModel model, string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -166,21 +177,60 @@ namespace Proyecto_Progra_MVC.Controllers
             return View(model);
         }
 
-        [HttpDelete]
+        [HttpGet]
         [Route("[action]")]
-        public async Task<IActionResult> Delete(string id)
+        [Route("[action]/{id}")]
+        [Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
+        public async Task<IActionResult> Delete(string id = null)
         {
+            Role role = new Role();
 
-            if (string.IsNullOrEmpty(id))
+            if (!string.IsNullOrEmpty(id))
             {
-                return BadRequest();
+                IdentityRole identityRole = await _roleManager.FindByIdAsync(id);
+
+                if (identityRole == null)
+                {
+                    return NotFound();
+                }
+
+                role.Id = identityRole.Id;
+                role.Name = identityRole.Name;
             }
 
-            IdentityRole role = await _roleManager.FindByIdAsync(id);
+            return View(role);
+        }
 
-            var result = await _roleManager.DeleteAsync(role);
+        [HttpPost]
+        [Route("[action]")]
+        [Route("[action]/{id}")]
+        [Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
+        public async Task<IActionResult> Delete(Role model, string id = null)
+        {
+            if (ModelState.IsValid)
+            {
+                IdentityRole role = new IdentityRole();
 
-            return Json(new { success = true, message = "Role borrado exitosamente." });
+                if (!string.IsNullOrEmpty(model.Id))
+                {
+                    role = await _roleManager.FindByIdAsync(model.Id);
+                }
+
+                role.Name = model.Name;
+
+                var result = !string.IsNullOrEmpty(model.Id) ? await _roleManager.DeleteAsync(role) : await _roleManager.DeleteAsync(role);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("index");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+
+            return View(model);
         }
     }
 }

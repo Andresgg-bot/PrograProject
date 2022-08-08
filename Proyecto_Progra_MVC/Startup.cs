@@ -113,9 +113,9 @@ namespace Proyecto_Progra_MVC
                 MinimumSameSitePolicy = SameSiteMode.Lax
             });
 
-            app.UseAuthorization();
-
             app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
