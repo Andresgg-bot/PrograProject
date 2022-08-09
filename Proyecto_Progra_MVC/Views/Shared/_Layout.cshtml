@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
 
       <!-- Responsive-->
-      <link rel="stylesheet" href="css/responsive.css">
-      <link rel="stylesheet" href="css/style.css"
+      <link rel="stylesheet" href="css/responsive.css"/>
 
       <!-- fevicon -->
       <link rel="icon" href="images/fevicon.png" type="image/gif" />
@@ -58,7 +57,6 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Alimentos"><i class="fa-solid fa-utensils"></i> Buscar Alimentos</a>
                                 </li>
 
-
                                 @if (!User.Identity.IsAuthenticated)
                                 {
                                     <li class="nav-item text-right">
@@ -71,11 +69,7 @@
                                 else
                                 {
                                     <li class="nav-item text-right">
-                                        <form asp-controller="Auth" asp-action="Logout" method="post">
-                                            <button type="submit" class="nav-link text-dark btn border-0">
-                                                Logout @User.Identity.Name
-                                            </button>
-                                        </form>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Profile">@User.Identity.Name</a>
                                     </li>
                                     <li class="nav-item text-right">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Progress" asp-action="Index">Progress</a>
@@ -86,6 +80,13 @@
                                             <a class="nav-link text-dark" asp-controller="Administration" asp-action="Index">Administration</a>
                                         </li>
                                     }
+                                    <li class="nav-item text-right">
+                                        <form asp-controller="Auth" asp-action="Logout" method="post">
+                                            <button type="submit" class="nav-link text-dark btn border-0">
+                                                Logout 
+                                            </button>
+                                        </form>
+                                    </li>                 
                                 }
 
                             </ul>
