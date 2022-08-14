@@ -19,16 +19,6 @@ namespace Proyecto_Progra_MVC.Domain.Models.InputModels
         public string Lastname { get; set; }
 
         [Required]
-        public int Age { get; set; }
-
-        [Display(Name = "Gender", GroupName = "genero")]
-        public Genders Gender { get; set; }
-
-        [Required]
-        [Display(Name = "Physical Activity")]
-        public PhysicalActivity PhysicalActivity { get; set; }
-
-        [Required]
         [DataType(DataType.EmailAddress)]
         [Remote(action: "checkemail", controller: "auth", ErrorMessage = "Email already exist")]
         public string Email { get; set; }

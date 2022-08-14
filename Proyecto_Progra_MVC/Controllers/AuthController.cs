@@ -49,11 +49,8 @@ namespace Proyecto_Progra_MVC.Controllers
                 {
                     Name = model.Name,
                     Lastname = model.Lastname,
-                    Age = model.Age,
-                    PhysicalActivity = model.PhysicalActivity,
                     UserName = model.Email,
-                    Email = model.Email,
-                    Gender = model.Gender
+                    Email = model.Email
                 };
 
                 var result = await _userManager.CreateAsync(user, password: model.Password);

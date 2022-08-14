@@ -221,9 +221,75 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.Measures", b =>
+            modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.Calories", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BasalMetabolism")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GainWeightCalories")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LoseWeightCalories")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaintainCalories")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
+
+                    b.ToTable("Calories");
+                });
+
+            modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.Info", b =>
+                {
+                    b.Property<int>("IdInfo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("InfoDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PhysicalActivity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<float>("Weight")
+                        .HasColumnType("real");
+
+                    b.HasKey("IdInfo");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Info");
+                });
+
+            modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.Measures", b =>
+                {
+                    b.Property<int>("IdMeasure")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -231,14 +297,14 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                     b.Property<float>("Chest")
                         .HasColumnType("real");
 
-                    b.Property<int>("IdProgress")
-                        .HasColumnType("int");
-
                     b.Property<float>("LeftArm")
                         .HasColumnType("real");
 
                     b.Property<float>("LeftLeg")
                         .HasColumnType("real");
+
+                    b.Property<DateTime>("MeasureDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<float>("RightArm")
                         .HasColumnType("real");
@@ -246,12 +312,15 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                     b.Property<float>("RightLeg")
                         .HasColumnType("real");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<float>("Waist")
                         .HasColumnType("real");
 
-                    b.HasKey("Id");
+                    b.HasKey("IdMeasure");
 
-                    b.HasIndex("IdProgress");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Measures");
                 });
@@ -269,15 +338,10 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                     b.Property<int>("Height")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<float>("Weight")
                         .HasColumnType("real");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Progress");
                 });
@@ -286,20 +350,14 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
-
                     b.Property<string>("Lastname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PhysicalActivity")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("User");
                 });
@@ -355,32 +413,36 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.Calories", b =>
+                {
+                    b.HasOne("Proyecto_Progra_MVC.Domain.Models.Entities.User", "User")
+                        .WithOne("Calories")
+                        .HasForeignKey("Proyecto_Progra_MVC.Domain.Models.Entities.Calories", "UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.Info", b =>
+                {
+                    b.HasOne("Proyecto_Progra_MVC.Domain.Models.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.Measures", b =>
                 {
-                    b.HasOne("Proyecto_Progra_MVC.Domain.Models.Entities.Progress", "Progress")
-                        .WithMany("Measures")
-                        .HasForeignKey("IdProgress")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Progress");
-                });
-
-            modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.Progress", b =>
-                {
-                    b.HasOne("Proyecto_Progra_MVC.Domain.Models.Entities.User", null)
-                        .WithMany("Progress")
+                    b.HasOne("Proyecto_Progra_MVC.Domain.Models.Entities.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId");
-                });
 
-            modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.Progress", b =>
-                {
-                    b.Navigation("Measures");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.User", b =>
                 {
-                    b.Navigation("Progress");
+                    b.Navigation("Calories");
                 });
 #pragma warning restore 612, 618
         }
