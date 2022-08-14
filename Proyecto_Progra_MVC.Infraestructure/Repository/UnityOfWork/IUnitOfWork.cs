@@ -22,5 +22,6 @@ namespace Proyecto_Progra_MVC.Infraestructure.Repository.UnitOfWork
 
         IRepository<TEntity> Repository<TEntity>()
             where TEntity : class;
+
     }
 }

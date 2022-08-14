@@ -48,7 +48,7 @@
                 <input asp-for="Lastname" class="form-control" placeholder="Last Name" />
                 <span asp-validation-for="Lastname" class="text-danger"></span>
 
-                <label asp-for="Age" class="form-text"></label>
+                @*<label asp-for="Age" class="form-text"></label>
                 <input asp-for="Age" class="form-control" placeholder="Age" />
                 <span asp-validation-for="Age" class="text-danger"></span>
 
@@ -72,8 +72,7 @@
                         @Enum.GetName(typeof(PhysicalActivity), physicalActivity)
                     </label>
                 }
-                @*<input asp-for="PhysicalActivity" class="form-control" placeholder="Physical Activity" />*@
-                <span asp-validation-for="PhysicalActivity" class="text-danger"></span>
+                <span asp-validation-for="PhysicalActivity" class="text-danger"></span>*@
 
                 <label asp-for="Email" class="form-text"></label>
                 <input asp-for="Email" class="form-control" placeholder="E-mail" autofocus />

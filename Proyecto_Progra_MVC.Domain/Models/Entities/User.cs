@@ -11,18 +11,13 @@ namespace Proyecto_Progra_MVC.Domain.Models.Entities
 {
     public class User : IdentityUser
     {
+        public string UserId { get; set; }
+
         public string Name { get; set; }
 
         public string Lastname { get; set; }
 
-        public int Age { get; set; }
+        public Calories Calories { get; set; }
 
-        [Display(Name = "Physical Activity")]
-        public PhysicalActivity PhysicalActivity { get; set; }
-
-        [Display(Name = "Gender")]
-        public Genders Gender { get; set; }
-
-        public List<Progress> Progress { get; set; }
     }
 }

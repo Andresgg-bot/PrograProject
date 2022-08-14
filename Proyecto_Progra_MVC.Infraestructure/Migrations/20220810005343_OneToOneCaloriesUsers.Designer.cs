@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proyecto_Progra_MVC.Infraestructure.Data;
 
 namespace Proyecto_Progra_MVC.Infraestructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220810005343_OneToOneCaloriesUsers")]
+    partial class OneToOneCaloriesUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -303,9 +305,6 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                     b.Property<float>("LeftLeg")
                         .HasColumnType("real");
 
-                    b.Property<DateTime>("MeasureDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<float>("RightArm")
                         .HasColumnType("real");
 
@@ -354,9 +353,6 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("User");
