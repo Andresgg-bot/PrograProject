@@ -302,12 +302,14 @@ button {
 /*--------------------------------------------------------------------- layout new css ---------------------------------------------------------------------*/
 
 .header {
-     width: 100%;
-     background: transparent;
-     position: absolute;
-     padding: 20px 30px;
+    width: 100%;
+    background: transparent;
+    position: absolute;
+    padding: 20px 30px;
 }
-
+nav.navbar.navbar-expand-sm.navbar-toggleable-sm.navbar-light.bg-white.border-bottom.box-shadow.mb-3 {
+    margin-top: -16px;
+}
 .logo a {
      font-size: 40px;
      font-weight: bold;
@@ -320,14 +322,15 @@ button {
 /** banner section **/
 
 .banner_main {
-     background: url(../images/banner.jpg);
-     background-repeat: no-repeat;
-     min-height: 800px;
-     display: flex;
-     justify-content: center;
-     align-content: center;
-     align-items: center;
-     background-size: 100% 100%;
+    background: url(../images/banner.jpg);
+    background-repeat: no-repeat;
+    min-height: 800px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    background-size: 100% 100%;
+    margin-right: -20px;
 }
 
 .text-bg {

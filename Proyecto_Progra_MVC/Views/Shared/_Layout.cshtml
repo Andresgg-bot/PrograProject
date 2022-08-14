@@ -41,68 +41,76 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 float-right">
-                            <nav class="navigation navbar navbar-expand-md navbar-dark ">
-                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                                        aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
-                                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                                    <ul class="navbar-nav flex-grow-1">
-                                        <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-dark" href="https://localhost:44398/#contacto">Contacto</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Alimentos"><i class="fa-solid fa-utensils"></i> Buscar Alimentos</a>
-                                        </li>
-
-                                        @if (!User.Identity.IsAuthenticated)
-                                        {
-                                            <li class="nav-item text-right">
-                                                <a class="nav-link text-dark" asp-controller="Auth" asp-action="Register">Register</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link text-dark" asp-controller="Auth" asp-action="Login">Login</a>
-                                            </li>
-                                        }
-                                        else
-                                        {
-                                            <li class="nav-item text-right">
-                                                <form asp-controller="Auth" asp-action="Logout" method="post">
-                                                    <button type="submit" class="nav-link text-dark btn border-0">
-                                                        Logout @User.Identity.Name
-                                                    </button>
-                                                </form>
-                                            </li>
-                                            <li class="nav-item text-right">
-                                                <a class="nav-link text-dark" asp-area="" asp-controller="Progress" asp-action="Index">Progress</a>
-                                            </li>
-
-                                            <li class="nav-item">
-                                                    <a class="nav-link text-dark" asp-controller="Administration" asp-action="Index">Administration</a>
-                                                </li>
-                                            @if (User.IsInRole("Administrators"))
-                                            {
-                                                <li class="nav-item">
-                                                    <a class="nav-link text-dark" asp-controller="Administration" asp-action="Index">Administration</a>
-                                                </li>
-
-                                                <li class="nav-item">
-                                                    <a class="nav-link text-dark" asp-controller="User" asp-action="Index">Users</a>
-                                                </li>
-                                            }
-                                        }
-
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
                     </div>
                 </div>
+                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 float-right">
+                    <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                            <ul class="navbar-nav flex-grow-1">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="https://localhost:44398/#contacto">Contacto</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Alimentos"><i class="fa-solid fa-utensils"></i> Buscar Alimentos</a>
+                                </li>
 
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <li class="nav-item text-right">
+                                        <a class="nav-link text-dark" asp-controller="Auth" asp-action="Register">Register</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-controller="Auth" asp-action="Login">Login</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    @*<li class="nav-item text-right">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Profile">@User.Identity.Name</a>
+                                    </li>*@
+                                    @*<li class="nav-item text-right">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Progress" asp-action="Index">Progress</a>
+                                    </li>*@
+
+                                    <li class="nav-item text-right">
+                                        <form asp-controller="Auth" asp-action="Logout" method="post">
+                                            <button type="submit" class="nav-link text-dark btn border-0">
+                                                Logout @User.Identity.Name
+                                            </button>
+                                        </form>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-controller="Administration" asp-action="Index">Administration</a>
+                                    </li>
+
+                                    @if (User.IsInRole("Administrators"))
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-controller="Administration" asp-action="Index">Administration</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-controller="User" asp-action="Index">Users</a>
+                                        </li>
+                                    }
+
+                                    @if (User.IsInRole("Client"))
+                                    {
+                                        
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
             </div>
         </nav>
     </header>
