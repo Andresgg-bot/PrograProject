@@ -7,49 +7,74 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Proyecto_Progra_MVC.Services.IServices;
 
 namespace Proyecto_Progra_MVC.Controllers
 {
     public class UserController : Controller
     {
 
-        public UserController(IUnitOfWork<ApplicationDbContext> unitOfWork)
+        public UserController(IUnitOfWork<ApplicationDbContext> unitOfWork, IUserServices services)
         {
             UnitOfWork = unitOfWork;
-            Repository = UnitOfWork.Repository<User>();
+            _userManger = UnitOfWork.Repository<User>();
+            _services = services;
         }
 
         readonly IUnitOfWork<ApplicationDbContext> UnitOfWork;
-        readonly IRepository<User> Repository;
+        readonly IRepository<User> _userManger;
+        readonly IUserServices _services;
 
 
         public async Task<IActionResult> Index()
         {
-            List<User> users = new List<User>();
-
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync("https://localhost:44328/api/User/getUsers"))
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        var Response = await response.Content.ReadAsStringAsync();
-                        users = JsonConvert.DeserializeObject<List<User>>(Response);
-                    }
-
-                }
-            }
+            var users = await _services.getUsersAsync();
             return View(users);
         }
 
         public IActionResult Profile(string id)
         {
-            User user = Repository.Obtener(usuario => usuario.Email == id);
+            User user = _userManger.Obtener(usuario => usuario.Email == id);
             if (user == null)
             {
                 return NotFound();
             }
             return View(user);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateUser(string? id)
+        {
+            User users = new User();
+            if (id == null)
+            {
+                return View(users);
+            }
+
+            users = await _services.getUserById(id);
+
+            if (users == null)
+            {
+                return NotFound();
+            }
+
+            return View(users);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateUser(User users)
+        {
+            if (ModelState.IsValid)
+            {
+                if (users.Id != null)
+                {
+                    await _services.updateUserById(users);
+                }
+
+                return RedirectToAction("index", "User");
+            }
+            return View(users);
+
         }
     }
 }

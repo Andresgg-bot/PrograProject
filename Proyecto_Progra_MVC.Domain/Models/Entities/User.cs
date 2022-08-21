@@ -13,8 +13,10 @@ namespace Proyecto_Progra_MVC.Domain.Models.Entities
     {
         public string UserId { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
+        [Required]
         public string Lastname { get; set; }
 
         public Calories Calories { get; set; }
