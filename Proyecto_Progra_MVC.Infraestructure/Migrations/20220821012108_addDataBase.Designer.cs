@@ -10,8 +10,8 @@ using Proyecto_Progra_MVC.Infraestructure.Data;
 namespace Proyecto_Progra_MVC.Infraestructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220809212331_OneToMany")]
-    partial class OneToMany
+    [Migration("20220821012108_addDataBase")]
+    partial class addDataBase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -225,7 +225,7 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
 
             modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.Calories", b =>
                 {
-                    b.Property<int>("IdCalories")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -242,7 +242,14 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                     b.Property<int>("MaintainCalories")
                         .HasColumnType("int");
 
-                    b.HasKey("IdCalories");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Calories");
                 });
@@ -262,6 +269,9 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
 
                     b.Property<int>("Height")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("InfoDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("PhysicalActivity")
                         .HasColumnType("int");
@@ -294,6 +304,9 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
 
                     b.Property<float>("LeftLeg")
                         .HasColumnType("real");
+
+                    b.Property<DateTime>("MeasureDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<float>("RightArm")
                         .HasColumnType("real");
@@ -340,9 +353,14 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.Property<string>("Lastname")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("User");
@@ -399,6 +417,15 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.Calories", b =>
+                {
+                    b.HasOne("Proyecto_Progra_MVC.Domain.Models.Entities.User", "User")
+                        .WithOne("Calories")
+                        .HasForeignKey("Proyecto_Progra_MVC.Domain.Models.Entities.Calories", "UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.Info", b =>
                 {
                     b.HasOne("Proyecto_Progra_MVC.Domain.Models.Entities.User", "User")
@@ -415,6 +442,11 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.User", b =>
+                {
+                    b.Navigation("Calories");
                 });
 #pragma warning restore 612, 618
         }

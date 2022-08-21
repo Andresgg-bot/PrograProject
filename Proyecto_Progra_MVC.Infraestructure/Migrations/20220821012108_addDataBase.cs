@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Proyecto_Progra_MVC.Infraestructure.Migrations
 {
-    public partial class IdentityUser : Migration
+    public partial class addDataBase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,11 +27,9 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Lastname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Age = table.Column<int>(type: "int", nullable: true),
-                    PhysicalActivity = table.Column<int>(type: "int", nullable: true),
-                    Gender = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -50,6 +48,21 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Progress",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Weight = table.Column<float>(type: "real", nullable: false),
+                    Height = table.Column<int>(type: "int", nullable: false),
+                    BMI = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Progress", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -158,6 +171,80 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Calories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BasalMetabolism = table.Column<int>(type: "int", nullable: false),
+                    MaintainCalories = table.Column<int>(type: "int", nullable: false),
+                    LoseWeightCalories = table.Column<int>(type: "int", nullable: false),
+                    GainWeightCalories = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Calories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Calories_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Info",
+                columns: table => new
+                {
+                    IdInfo = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Weight = table.Column<float>(type: "real", nullable: false),
+                    Height = table.Column<int>(type: "int", nullable: false),
+                    Age = table.Column<int>(type: "int", nullable: false),
+                    PhysicalActivity = table.Column<int>(type: "int", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: false),
+                    InfoDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Info", x => x.IdInfo);
+                    table.ForeignKey(
+                        name: "FK_Info_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Measures",
+                columns: table => new
+                {
+                    IdMeasure = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LeftArm = table.Column<float>(type: "real", nullable: false),
+                    RightArm = table.Column<float>(type: "real", nullable: false),
+                    LeftLeg = table.Column<float>(type: "real", nullable: false),
+                    RightLeg = table.Column<float>(type: "real", nullable: false),
+                    Waist = table.Column<float>(type: "real", nullable: false),
+                    Chest = table.Column<float>(type: "real", nullable: false),
+                    MeasureDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Measures", x => x.IdMeasure);
+                    table.ForeignKey(
+                        name: "FK_Measures_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -196,6 +283,23 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Calories_UserId",
+                table: "Calories",
+                column: "UserId",
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Info_UserId",
+                table: "Info",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Measures_UserId",
+                table: "Measures",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -214,6 +318,18 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Calories");
+
+            migrationBuilder.DropTable(
+                name: "Info");
+
+            migrationBuilder.DropTable(
+                name: "Measures");
+
+            migrationBuilder.DropTable(
+                name: "Progress");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

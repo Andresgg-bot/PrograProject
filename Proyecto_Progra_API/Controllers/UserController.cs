@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Proyecto_Progra_MVC.Domain.Models.Entities;
+using Proyecto_Progra_MVC.Domain.Models.InputModels;
 using Proyecto_Progra_MVC.Infraestructure.Data;
 using Proyecto_Progra_MVC.Infraestructure.Repository;
 using Proyecto_Progra_MVC.Infraestructure.Repository.UnitOfWork;
+using System.Threading.Tasks;
 
 namespace Proyecto_Progra_API.Controllers
 {
@@ -34,8 +36,44 @@ namespace Proyecto_Progra_API.Controllers
             return BadRequest("There are not users");
         }
 
+        [HttpGet]
+        [Route("getUser")]
+        public IActionResult GetUser(string id)
+        {
+            var User = _userManger.Obtener(id);
+            _unitOfWork.Guardar();
+
+            if (User != null)
+            {
+                return Ok(User);
+            }
+            return BadRequest("The user doesnt exist");
+        }
+
+        [HttpPut]
+        [Route("updateUser")]
+        public IActionResult UpdateUser([FromBody] UpdateUserInputModel model)
+        {
+            var user = _userManger.Obtener(model.Id);
+
+            if (ModelState.IsValid)
+            {
+                user.Id = model.Id;
+                user.Name = model.Name;
+                user.Email = model.Email;
+                user.Lastname = model.Lastname;
+
+                _userManger.Actualizar(user);
+                _unitOfWork.Guardar();
+
+                return Ok(model);
+            }
+
+            return BadRequest("Update user failed");
+        }
+
         [HttpDelete]
-        [Route("deleteUsers")]
+        [Route("deleteUser")]
         public IActionResult DeleteUsers(string id)
         {
             var User = _userManger.Obtener(id);
