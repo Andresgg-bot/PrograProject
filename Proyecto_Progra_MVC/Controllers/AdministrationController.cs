@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Proyecto_Progra_MVC.Application.Handlers;
 using Proyecto_Progra_MVC.Domain.Models.Entities;
 using Proyecto_Progra_MVC.Domain.Models.ViewModels;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,7 +24,7 @@ namespace Proyecto_Progra_MVC.Controllers
         readonly RoleManager<IdentityRole> _roleManager;
         readonly UserManager<User> _userManager;
 
-        [Authorize(Policy = PermissionTypesNames.VIEWROLES)]
+        //[Authorize(Policy = PermissionTypesNames.VIEWROLES)]
         public IActionResult Index()
         {
             RoleViewModel model =
@@ -39,7 +41,7 @@ namespace Proyecto_Progra_MVC.Controllers
         [HttpGet]
         [Route("[action]")]
         [Route("[action]/{id}")]
-        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
+        //[Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         public async Task<IActionResult> Upsert(string id = null)
         {
             Role role = new Role();
@@ -63,7 +65,7 @@ namespace Proyecto_Progra_MVC.Controllers
         [HttpPost]
         [Route("[action]")]
         [Route("[action]/{id}")]
-        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
+        //[Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         public async Task<IActionResult> Upsert(Role model, string id = null)
         {
             if (ModelState.IsValid)
@@ -98,7 +100,7 @@ namespace Proyecto_Progra_MVC.Controllers
 
         [HttpGet]
         [Route("[action]/{id}")]
-        [Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
+        //[Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
         public async Task<IActionResult> UsersRole(string id)
         {
             UserRoleViewModel model = 
@@ -136,7 +138,7 @@ namespace Proyecto_Progra_MVC.Controllers
 
         [HttpPost]
         [Route("[action]/{id}")]
-        [Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
+        //[Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
         public async Task<IActionResult> UsersRole(UserRoleViewModel model, string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -180,7 +182,7 @@ namespace Proyecto_Progra_MVC.Controllers
         [HttpGet]
         [Route("[action]")]
         [Route("[action]/{id}")]
-        [Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
+        //[Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
         public async Task<IActionResult> Delete(string id = null)
         {
             Role role = new Role();
@@ -204,7 +206,7 @@ namespace Proyecto_Progra_MVC.Controllers
         [HttpPost]
         [Route("[action]")]
         [Route("[action]/{id}")]
-        [Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
+        //[Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
         public async Task<IActionResult> Delete(Role model, string id = null)
         {
             if (ModelState.IsValid)
@@ -231,6 +233,91 @@ namespace Proyecto_Progra_MVC.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        [Route("userlist")]
+        //[Authorize(Policy = PermissionTypesNames.VIEWROLES)]
+        public async Task<IActionResult> UserList()
+        {
+
+            List<UserViewModel> model = new List<UserViewModel>();
+
+            var users = await _userManager.Users.ToListAsync();
+            var userViewModel = new List<UserViewModel>();
+
+            foreach (User user in users)
+            {
+                var usVM = new UserViewModel();
+                usVM.Id = user.Id;
+                usVM.Email = user.Email;
+                usVM.Roles = new List<string>(await _userManager.GetRolesAsync(user));
+                userViewModel.Add(usVM);
+            }
+
+            return View(userViewModel);
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        [Route("[action]/{id}")]
+        //[Authorize(Policy = PermissionTypesNames.WRITEROLES)]
+        public async Task<IActionResult> EditRole(string id)
+        {
+            ViewBag.Id = id;
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return View("NotFound");
+            }
+            var model = new List<UserRoleViewModel>();
+            foreach (var role in _roleManager.Roles)
+            {
+                var userRolesViewModel = new UserRoleViewModel
+                {
+                    RoleId = role.Id,
+                    RoleName = role.Name
+                };
+                if (await _userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userRolesViewModel.IsSelected = true;
+                }
+                else
+                {
+                    userRolesViewModel.IsSelected = false;
+                }
+                model.Add(userRolesViewModel);
+            }
+            ViewBag.UserName = user.Email;
+            return View(model);
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        [Route("[action]/{id}")]
+        //[Authorize(Policy = PermissionTypesNames.WRITEROLES)]
+        public async Task<IActionResult> EditRole(List<UserRoleViewModel> viewModel, string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return RedirectToAction("Index");
+            }
+            var roles = await _userManager.GetRolesAsync(user);
+            var result = await _userManager.RemoveFromRolesAsync(user, roles);
+
+            if (!result.Succeeded)
+            {
+                return View(viewModel);
+            }
+            var rolesSelected = viewModel.Where(x => x.IsSelected).Select(y => y.RoleName);
+            result = await _userManager.AddToRolesAsync(user, rolesSelected);
+
+            if (!result.Succeeded)
+            {
+                return View(viewModel);
+            }
+            return RedirectToAction("UserList");
         }
     }
 }

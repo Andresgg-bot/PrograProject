@@ -12,6 +12,6 @@ namespace Proyecto_Progra_MVC.Domain.Models.Enum
         [Display(Name = "Male")]
         MALE = 1,
         [Display(Name = "Female")]
-        FEMALE
+        FEMALE = 2
     }
 }

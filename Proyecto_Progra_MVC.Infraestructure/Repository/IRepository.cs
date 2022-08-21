@@ -10,17 +10,14 @@ namespace Proyecto_Progra_MVC.Infraestructure.Repository
     public interface IRepository<TEntity>
         where TEntity : class
     {
-        IEnumerable<TEntity> Listar(Expression<Func<TEntity, bool>> filtro = null, Func<IQueryable<TEntity>, 
-            IOrderedQueryable<TEntity>> ordemiento = null, string propiedadesIncluidas = "");
-
-        IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? Filter = null, string? includeProperties = null);
+        IEnumerable<TEntity> Listar(Expression<Func<TEntity, bool>> filtro = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> ordemiento = null, string propiedadesIncluidas = "");
 
         TEntity Obtener(object id);
 
         TEntity Obtener(Expression<Func<TEntity, bool>> filtro);
 
         void Insertar(TEntity entidad);
-        
+
         void Actualizar(TEntity entidad);
 
         void Borrar(object id);

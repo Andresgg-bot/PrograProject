@@ -25,7 +25,6 @@ namespace Proyecto_Progra_MVC.Infraestructure
             services.AddDbContext<ApplicationDbContext>
                 (options => options.UseSqlServer(configuration.GetConnectionString("ConnectionString")))
                     .AddUnitOfWork<ApplicationDbContext>()
-                    .AddRepository<Progress, ProgressRepository>()
                     .AddRepository<Measures, MeasuresRepository>()
                     .AddRepository<User, UserRepository>()
                     .AddRepository<Info, InfoRepository>();

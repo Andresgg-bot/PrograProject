@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,9 @@ namespace Proyecto_Progra_MVC.Domain.Models.Entities
         public Genders Gender { get; set; }
 
         public DateTime InfoDate { get; set; }
+
+        [ForeignKey("User")]
+        public string UserId { get; set; }
 
         public User User { get; set; }
 

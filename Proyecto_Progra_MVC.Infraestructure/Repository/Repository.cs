@@ -51,7 +51,7 @@ namespace Proyecto_Progra_MVC.Infraestructure.Repository
             return query.ToList();
         }
 
-        public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? Filter = null, string? includeProperties = "")
+        public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> Filter = null, string includeProperties = "")
         {
             IQueryable<TEntity> query = dbSet;
 
