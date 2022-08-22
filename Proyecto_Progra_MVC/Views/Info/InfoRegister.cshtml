@@ -1,0 +1,113 @@
+﻿@using Proyecto_Progra_MVC.Domain.Models.Enum
+@model Info
+
+@{
+    var titulo = "Progress register";
+}
+<form method="post">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@titulo</h2>
+        </div>
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Weight"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Weight" class="form-control" />
+                    <span asp-validation-for="Weight" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Height"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Height" class="form-control" />
+                    <span asp-validation-for="Height" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Age"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Age" class="form-control" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="PhysicalActivity" class="form-text">Physical Activity</label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="PhysicalActivity" class="form-control" aria-describedby="helpPhysicalActivity">
+                        @foreach (var activity in Enum.GetValues(typeof(PhysicalActivity)))
+                        {
+                            <option value="@((int)activity)">@Enum.GetName(typeof(PhysicalActivity), activity)</option>
+                        }
+                    </select>
+                    <small id="helpPhysicalActivity" class="form-text text-muted">
+                        Physical activity intensity.
+                    </small>
+                    <span asp-validation-for="PhysicalActivity" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Gender" class="form-text"></label>
+                </div>
+                <div class="col-8">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" id="StatusYes" asp-for="Gender" type="radio" value="1" />
+                        <label class="form-check-label" for="StatusYes">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" id="StatusNo" asp-for="Gender" type="radio" value="2" />
+                        <label class="form-check-label" for="StatusNo">Female</label>
+                    </div>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="InfoDate">Date</label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="InfoDate" class="form-control" />
+                    <span asp-validation-for="InfoDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row" hidden>
+                <div class="col-4">
+                    <label asp-for="UserId"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="UserId" class="form-control" />
+                    <span asp-validation-for="UserId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary form-control">Save</button>
+                        </div>
+                        <div class="col">
+                            <a href="/user/Index" class="btn btn-success form-control">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+<partial name="_ValidationScriptsPartial" />
+}
+

@@ -43,7 +43,7 @@ namespace Proyecto_Progra_MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> UpdateUser(string? id)
+        public async Task<IActionResult> UpdateUser(string id)
         {
             User users = new User();
             if (id == null)

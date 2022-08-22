@@ -40,7 +40,6 @@ namespace Proyecto_Progra_API
             services.AddDbContext<ApplicationDbContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")))
                     .AddUnitOfWork<ApplicationDbContext>()
-                    .AddRepository<Progress, ProgressRepository>()
                     .AddRepository<Measures, MeasuresRepository>()
                     .AddRepository<User, UserRepository>()
                     .AddRepository<Info, InfoRepository>();

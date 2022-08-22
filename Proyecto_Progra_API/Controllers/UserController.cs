@@ -16,17 +16,17 @@ namespace Proyecto_Progra_API.Controllers
         public UserController(IUnitOfWork<ApplicationDbContext> unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _userManger = _unitOfWork.Repository<User>();
+            _userManager = _unitOfWork.Repository<User>();
         }
 
         readonly IUnitOfWork<ApplicationDbContext> _unitOfWork;
-        readonly IRepository<User> _userManger;
+        readonly IRepository<User> _userManager;
 
         [HttpGet]
         [Route("getUsers")]
         public IActionResult GetUsers()
         {
-            var allUsers = _userManger.GetAll();
+            var allUsers = _userManager.Listar();
             _unitOfWork.Guardar();
 
             if (allUsers != null)
@@ -40,7 +40,7 @@ namespace Proyecto_Progra_API.Controllers
         [Route("getUser")]
         public IActionResult GetUser(string id)
         {
-            var User = _userManger.Obtener(id);
+            var User = _userManager.Obtener(id);
             _unitOfWork.Guardar();
 
             if (User != null)
@@ -54,7 +54,7 @@ namespace Proyecto_Progra_API.Controllers
         [Route("updateUser")]
         public IActionResult UpdateUser([FromBody] UpdateUserInputModel model)
         {
-            var user = _userManger.Obtener(model.Id);
+            var user = _userManager.Obtener(model.Id);
 
             if (ModelState.IsValid)
             {
@@ -63,7 +63,7 @@ namespace Proyecto_Progra_API.Controllers
                 user.Email = model.Email;
                 user.Lastname = model.Lastname;
 
-                _userManger.Actualizar(user);
+                _userManager.Actualizar(user);
                 _unitOfWork.Guardar();
 
                 return Ok(model);
@@ -76,11 +76,11 @@ namespace Proyecto_Progra_API.Controllers
         [Route("deleteUser")]
         public IActionResult DeleteUsers(string id)
         {
-            var User = _userManger.Obtener(id);
+            var User = _userManager.Obtener(id);
 
             if (User != null)
             {
-                _userManger.Borrar(User);
+                _userManager.Borrar(User);
                 _unitOfWork.Guardar();
 
                 return Ok($"User deleted successfully");

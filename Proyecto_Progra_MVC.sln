@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto_Progra_MVC.Domain"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto_Progra_MVC.Infraestructure", "Proyecto_Progra_MVC.Infraestructure\Proyecto_Progra_MVC.Infraestructure.csproj", "{70C5411B-9777-4D41-AAF0-7FCA23B03A30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proyecto_Progra_API", "Proyecto_Progra_API\Proyecto_Progra_API.csproj", "{53FDCA1C-A8BA-449A-99DA-A8622CD27E3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Proyecto_Progra_API", "Proyecto_Progra_API\Proyecto_Progra_API.csproj", "{53FDCA1C-A8BA-449A-99DA-A8622CD27E3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -26,9 +26,8 @@ namespace Proyecto_Progra_MVC.Infraestructure.Data
         }
 
         public DbSet<User> User { get; set; }
-        public DbSet<Progress> Progress { get; set; }
         public DbSet<Measures> Measures { get; set; }
-        public DbSet<Calories> Calories { get; set; }
         public DbSet<Info> Info { get; set; }
+        public DbSet<Calories> Calories { get; set; }
     }
 }

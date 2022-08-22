@@ -11,8 +11,8 @@ namespace Proyecto_Progra_MVC.Application.Contracts.Data
     public interface IApplicationDbContext
     {
         DbSet<User> User { get; set; }
-        DbSet<Progress> Progress { get; set; }
         DbSet<Measures> Measures { get; set; }
+        DbSet<Info> Info { get; set; }
 
     }
 }
