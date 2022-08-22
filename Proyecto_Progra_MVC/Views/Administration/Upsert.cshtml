@@ -1,72 +1,37 @@
 ﻿@model Role
 
-<style>
 
-    .header {
-        margin-bottom: 20px;
-    }
+<section class="contact-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="section-title contact-title">
+                    <h2>Role</h2>
+                </div>
+                <form method="post">
+                    <div class="section-title contact-title form-group header">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="clearfix separator"></div>
+                    </div>
 
-        .header h3 {
-            margin-bottom: 5px;
-            margin-top: 25px;
-        }
+                    <div class="form-group inputs">
+                        <input type="hidden" asp-for="Id" />
 
-    .separator {
-        height: 1px;
-        background: #e8e8e8;
-        margin: 0px -25px;
-    }
+                        <label asp-for="Name" class="form-text"></label>
+                        <input asp-for="Name" class="form-control" placeholder="Name" autofocus />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
 
-    .inputs {
-        margin-top: 25px;
-    }
+                    <partial name="_CancelUpsertButtonsPartial" model="Model.Id" />
 
-        .inputs label {
-            letter-spacing: 1px;
-            margin-bottom: 7px;
-        }
-
-        .inputs #submit #cancel {
-            width: 50%;
-            margin-top: 20px;
-            padding: 15px 0;
-            letter-spacing: 1px;
-        }
-</style>
-
-<div class="form-row">
-    <div class="form-group col-5">
-        <form method="post">
-            <div class="form-group header">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <h3>Role</h3>
+                </form>
             </div>
-
-            <div class="form-group">
-                <div class="clearfix separator"></div>
-            </div>
-
-            <div class="form-group inputs">
-                <input type="hidden" asp-for="Id" />
-
-                <label asp-for="Name" class="form-text"></label>
-                <input asp-for="Name" class="form-control" placeholder="Name" autofocus />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-
-            <div class="form-group inputs">
-                <a id="cancel" type="button" class="btn btn-outline-secondary" asp-action="index">
-                    <i class="fa-solid fa-ban"></i> Cancel
-                </a>
-                <button id="submit" type="submit" class="btn btn-outline-primary">
-                    <i class="fa-solid fa-floppy-disk"></i> Save
-                </button>
-            </div>
-
-        </form>
+        </div>
     </div>
-</div>
-
+</section>
 @section Scripts
 {
     <partial name="_ValidationScriptsPartial" />

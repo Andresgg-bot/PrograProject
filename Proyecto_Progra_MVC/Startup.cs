@@ -15,6 +15,8 @@ using Proyecto_Progra_MVC.Contracts;
 using Proyecto_Progra_MVC.Domain.Models.ConfigurationModels;
 using Proyecto_Progra_MVC.Infraestructure;
 using Proyecto_Progra_MVC.Infraestructure.Data;
+using Proyecto_Progra_MVC.Services;
+using Proyecto_Progra_MVC.Services.IServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,6 +85,9 @@ namespace Proyecto_Progra_MVC
             /*services.AddScoped<IApplicationDbContext>
                 (options => options.GetService<ApplicationDbContext>());*/
 
+            services.AddScoped<IUserServices, UserService>();
+
+
             services.Configure<RecaptchaConfiguration>(Configuration.GetSection("RecaptchaConfiguration"));
 
             services.AddSingleton<IRecaptchaValidator, RecaptchaValidator>();
@@ -113,9 +118,9 @@ namespace Proyecto_Progra_MVC
                 MinimumSameSitePolicy = SameSiteMode.Lax
             });
 
-            app.UseAuthorization();
-
             app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

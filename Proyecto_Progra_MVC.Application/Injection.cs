@@ -1,13 +1,17 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Proyecto_Progra_MVC.Application.Configurations;
 using Proyecto_Progra_MVC.Application.Contracts.Managers;
+using Proyecto_Progra_MVC.Application.Extensions;
+using Proyecto_Progra_MVC.Application.Handlers;
 using Proyecto_Progra_MVC.Application.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -54,6 +58,31 @@ namespace Proyecto_Progra_MVC.Application
                                 };
                         }
                     );
+
+            services.AddAuthorization
+              (
+                options =>
+                {
+                    foreach (var value in Enum.GetValues(typeof(PermissionTypes)))
+                    {
+                        PermissionTypes permissionType = (PermissionTypes)value;
+                        var description = permissionType.GetDescription().Split(':');
+                        var claim =
+                    new Claim(description.FirstOrDefault(), description.LastOrDefault());
+                        options.AddPolicy
+                    (
+                      string.Join(":", description),
+                      policy =>
+                      {
+                          policy.Requirements.Add
+                            (new PermissionRequirement(permissionType));
+                      }
+                    );
+                    }
+                }
+              );
+            services.AddScoped<IAuthorizationHandler, PermissionHandler>();
+
 
             return services;
         }

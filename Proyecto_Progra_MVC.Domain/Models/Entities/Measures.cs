@@ -11,8 +11,7 @@ namespace Proyecto_Progra_MVC.Domain.Models.Entities
     public class Measures
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int IdMeasure { get; set; }
 
         public float LeftArm { get; set; }
 
@@ -26,10 +25,9 @@ namespace Proyecto_Progra_MVC.Domain.Models.Entities
 
         public float Chest { get; set; }
 
-        [ForeignKey("Progress")]
-        public int IdProgress { get; set; }
+        public DateTime MeasureDate { get; set; }
 
-        public Progress Progress { get; set; }
+        public User User { get; set; }
 
     }
 }

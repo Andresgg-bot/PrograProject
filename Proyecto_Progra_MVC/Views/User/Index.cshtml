@@ -1,0 +1,89 @@
+﻿@model List<User>
+
+<section class="class-timetable-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 section-title">
+                <h2>Users list</h2>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="class-timetable">
+                    <table  style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Lastname</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                                <th>Progress Actions</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+                                <tr id="progress_@user.Id">
+                                    <td><p>@user.Name</p></td>
+                                    <td><p>@user.Lastname</p></td>
+                                    <td><p>@user.Email</p></td>
+                                    <td>
+                                        <div class="text-center">
+                                            <a href="/user/updateuser/@user.Id" class="btn btn-outline-info" style="cursor:pointer">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                            <a onclick=Delete("@user.Id") class="btn btn-outline-danger" style="cursor:pointer">
+                                                <i class="fa-solid fa-trash" style="color:white";></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="text-center">
+                                            <a href="/info/index/@user.Id" class="btn btn-outline-info" style="cursor:pointer">
+                                                <i class="fa-solid fa-heart-circle-exclamation"></i> Progress
+                                            </a>
+                                            <a href="/info/inforegister/@user.Id" class="btn btn-outline-success" style="cursor:pointer">
+                                                <i class="fa-solid fa-heart-circle-plus"></i> Add progress
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function Delete(id) {
+        swal({
+            title: "Are you sure to want to delete this vehicle?",
+            text: "Data cannot be recovered once it has been deleted!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "/vehicles/delete/" + id,
+                    success: function(data) {
+                        if (data.success) {
+                            toastr.success(data.message);
+                            $("#vehicle_" + id).remove();
+                        }
+                        else {
+                            toastr.error(data.message);
+                        }
+                    }
+                });
+            }
+        });
+    }
+</script>

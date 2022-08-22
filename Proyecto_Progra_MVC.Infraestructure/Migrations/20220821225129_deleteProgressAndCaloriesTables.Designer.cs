@@ -10,8 +10,8 @@ using Proyecto_Progra_MVC.Infraestructure.Data;
 namespace Proyecto_Progra_MVC.Infraestructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220731192511_IdentityUser")]
-    partial class IdentityUser
+    [Migration("20220821225129_deleteProgressAndCaloriesTables")]
+    partial class deleteProgressAndCaloriesTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -223,9 +223,12 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.User", b =>
+            modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.Info", b =>
                 {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+                    b.Property<int>("IdInfo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
@@ -233,14 +236,80 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<string>("Lastname")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Height")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("InfoDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("PhysicalActivity")
                         .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<float>("Weight")
+                        .HasColumnType("real");
+
+                    b.HasKey("IdInfo");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Info");
+                });
+
+            modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.Measures", b =>
+                {
+                    b.Property<int>("IdMeasure")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<float>("Chest")
+                        .HasColumnType("real");
+
+                    b.Property<float>("LeftArm")
+                        .HasColumnType("real");
+
+                    b.Property<float>("LeftLeg")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime>("MeasureDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<float>("RightArm")
+                        .HasColumnType("real");
+
+                    b.Property<float>("RightLeg")
+                        .HasColumnType("real");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<float>("Waist")
+                        .HasColumnType("real");
+
+                    b.HasKey("IdMeasure");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Measures");
+                });
+
+            modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.User", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("Lastname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("User");
                 });
@@ -294,6 +363,24 @@ namespace Proyecto_Progra_MVC.Infraestructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.Info", b =>
+                {
+                    b.HasOne("Proyecto_Progra_MVC.Domain.Models.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Proyecto_Progra_MVC.Domain.Models.Entities.Measures", b =>
+                {
+                    b.HasOne("Proyecto_Progra_MVC.Domain.Models.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

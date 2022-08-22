@@ -16,8 +16,18 @@ namespace Proyecto_Progra_MVC.Infraestructure.Data
         {
 
         }
+        /*protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<User>()
+                .HasOne<Calories>(u => u.Calories)
+                .WithOne(c => c.User)
+                .HasForeignKey<Calories>(c => c.UserId);
+        }*/
+
         public DbSet<User> User { get; set; }
-        public DbSet<Progress> Progress { get; set; }
         public DbSet<Measures> Measures { get; set; }
+        public DbSet<Info> Info { get; set; }
+        //public DbSet<Calories> Calories { get; set; }
     }
 }

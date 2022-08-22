@@ -17,7 +17,7 @@ namespace Proyecto_Progra_MVC.Infraestructure.Repository
         TEntity Obtener(Expression<Func<TEntity, bool>> filtro);
 
         void Insertar(TEntity entidad);
-        
+
         void Actualizar(TEntity entidad);
 
         void Borrar(object id);

@@ -28,26 +28,6 @@ namespace Proyecto_Progra_MVC.Controllers
             return View();
         }
 
-        //Cartero - Enviar correo
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Index([FromForm] IndexViewModel viewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                _Cartero.Enviar
-                    (
-                        new CorreoElectronico
-                        {
-                            Destinatario = "fidelitasandresch@gmail.com",
-                            Asunto = viewModel.correoElectronico.Asunto,
-                            Cuerpo = viewModel.correoElectronico.Cuerpo
-                        }
-                    );
-            }
-
-            return View(viewModel);
-        }
 
         public IActionResult Privacy()
         {
@@ -60,10 +40,30 @@ namespace Proyecto_Progra_MVC.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
-        public IActionResult Alimentos()
+        public IActionResult Contact()
         {
             return View();
+        }
+
+        //Cartero - Enviar correo
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Contact([FromForm] IndexViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _Cartero.Enviar
+                    (
+                        new CorreoElectronico
+                        {
+                            Destinatario = viewModel.correoElectronico.Destinatario,
+                            Asunto = viewModel.correoElectronico.Asunto,
+                            Cuerpo = viewModel.correoElectronico.Cuerpo
+                        }
+                    );
+            }
+
+            return View(viewModel);
         }
     }
 }

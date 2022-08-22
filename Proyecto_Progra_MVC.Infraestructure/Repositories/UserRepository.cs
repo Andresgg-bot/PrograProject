@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Progra_MVC.Infraestructure.Repositories
 {
-    public class ProgressRepository : Repository<Progress>, IRepository<Progress>
+    public class UserRepository : Repository<User>, IRepository<User>
     {
-        public ProgressRepository(ApplicationDbContext context) : base(context)
+        public UserRepository(ApplicationDbContext context) : base(context)
         {
 
         }

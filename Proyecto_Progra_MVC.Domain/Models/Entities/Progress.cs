@@ -11,7 +11,6 @@ namespace Proyecto_Progra_MVC.Domain.Models.Entities
     public class Progress
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public float Weight { get; set; }
@@ -20,13 +19,6 @@ namespace Proyecto_Progra_MVC.Domain.Models.Entities
 
         [Display(Name = "Body Mass Index")]
         public float BMI { get; set; }
-
-        [ForeignKey("User")]
-        public int IdUser { get; set; }
-
-        public User User { get; set; }
-
-        public List<Measures> Measures { get; set; }
 
     }
 }
