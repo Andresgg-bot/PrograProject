@@ -19,6 +19,8 @@
                                 <th>Lastname</th>
                                 <th>Email</th>
                                 <th>Actions</th>
+                                <th>Progress Actions</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -34,10 +36,17 @@
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
                                             <a onclick=Delete("@user.Id") class="btn btn-outline-danger" style="cursor:pointer">
-                                                <i class="fa-solid fa-trash"></i>
+                                                <i class="fa-solid fa-trash" style="color:white";></i>
                                             </a>
-                                            <a href="/requests/requests/@user.Id" class="btn btn-outline-success" style="cursor:pointer">
-                                                <i class="fa-solid fa-car"></i>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="text-center">
+                                            <a href="/info/index/@user.Id" class="btn btn-outline-info" style="cursor:pointer">
+                                                <i class="fa-solid fa-heart-circle-exclamation"></i> Progress
+                                            </a>
+                                            <a href="/info/inforegister/@user.Id" class="btn btn-outline-success" style="cursor:pointer">
+                                                <i class="fa-solid fa-heart-circle-plus"></i> Add progress
                                             </a>
                                         </div>
                                     </td>

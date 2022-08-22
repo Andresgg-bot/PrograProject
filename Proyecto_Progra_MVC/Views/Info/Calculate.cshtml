@@ -3,59 +3,63 @@
 @{ 
     var titulo = "Calculate";
 }
+<section class="contact-section spad">
 
-    <div class="row p-3 border">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="col-12 border-bottom">
-            <h2 class="text-primary">@titulo</h2>
-        </div>
-        <div class="col-8 pt-4">
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="basal"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="basal" class="form-control" readonly/>
-                    <span asp-validation-for="basal" class="text-danger"></span>
-                </div>
-
-                <div class="col-4">
-                    <label asp-for="calorias"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="calorias" class="form-control" readonly/>
-                    <span asp-validation-for="calorias" class="text-danger"></span>
-                </div>
-
-                <div class="col-4">
-                    <label asp-for="bajar"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="bajar" class="form-control" readonly/>
-                    <span asp-validation-for="bajar" class="text-danger"></span>
-                </div>
-
-                <div class="col-4">
-                    <label asp-for="subir"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="subir" class="form-control" readonly/>
-                    <span asp-validation-for="subir" class="text-danger"></span>
-                </div>
+    <div class="container">
+        <br />
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-12 border-bottom">
+                <h2 class="text-primary">@titulo</h2>
             </div>
+            <div class="col-8 pt-4">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <p><label asp-for="basal"></label></p>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="basal" class="form-control" readonly/>
+                        <span asp-validation-for="basal" class="text-danger"></span>
+                    </div>
 
-            <div class="form-group row">
-                <div class="col-8 offset-4">
-                    <div class="row">
-                        <div class="col">
-                            <a href="/info/index/@Model.IdInfo" class="btn btn-success form-control">Back</a>
+                    <div class="col-4">
+                        <p><label asp-for="calorias"></label></p>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="calorias" class="form-control" readonly/>
+                        <span asp-validation-for="calorias" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-4">
+                        <p><label asp-for="bajar"></label></p>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="bajar" class="form-control" readonly/>
+                        <span asp-validation-for="bajar" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-4">
+                        <p><label asp-for="subir"></label></p>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="subir" class="form-control" readonly/>
+                        <span asp-validation-for="subir" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-8 offset-4">
+                        <div class="row">
+                            <div class="col">
+                                <a href="/info/index/@Model.IdInfo" class="btn btn-success form-control">Back</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+</section>
 @section Scripts
 { 
     <partial name="_ValidationScriptsPartial" />

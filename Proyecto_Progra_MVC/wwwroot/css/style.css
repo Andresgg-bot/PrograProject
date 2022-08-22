@@ -1691,11 +1691,11 @@ ol {
 	margin-bottom: 10px;
 }
 
-.class-timetable table tbody tr td span {
-	display: block;
-	font-size: 12px;
-	color: #a9a9a9;
-}
+	.class-timetable table tbody tr td span {
+		display: block;
+		font-size: 12px;
+		color: #ffffff;
+	}
 
 /*---------------------
   Class Details Section
@@ -2594,34 +2594,34 @@ ol {
 	margin-right: 20px;
 }
 
-.contact-widget .cw-text p {
-	overflow: hidden;
-	color: #c4c4c4;
-	margin-bottom: 0;
-	padding-top: 10px;
-}
+	.contact-widget .cw-text p {
+		overflow: hidden;
+		color: #ffffff;
+		margin-bottom: 0;
+		padding-top: 10px;
+	}
 
 .contact-widget .cw-text ul {
 	overflow: hidden;
 	padding-top: 20px;
 }
 
-.contact-widget .cw-text ul li {
-	list-style: none;
-	font-size: 14px;
-	color: #c4c4c4;
-	margin-right: 25px;
-	display: inline-block;
-	position: relative;
-}
+	.contact-widget .cw-text ul li {
+		list-style: none;
+		font-size: 14px;
+		color: #ffffff;
+		margin-right: 25px;
+		display: inline-block;
+		position: relative;
+	}
 
-.contact-widget .cw-text ul li:after {
-	position: absolute;
-	right: -18px;
-	top: 0;
-	content: "|";
-	color: #545454;
-}
+		.contact-widget .cw-text ul li:after {
+			position: absolute;
+			right: -18px;
+			top: 0;
+			content: "|";
+			color: #ffffff;
+		}
 
 .contact-widget .cw-text ul li:last-child {
 	margin-right: 0;
