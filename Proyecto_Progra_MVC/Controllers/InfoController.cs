@@ -130,7 +130,7 @@ namespace Proyecto_Progra_MVC.Controllers
 
             calculate.IdInfo = info.UserId;
 
-            if (info.Gender.Equals(1))
+            if (info.Gender.Equals(Genders.MALE))
             {
                 calculate.basal = (int)(66 + (13.7 * info.Weight) + (5 * info.Height) - (6.8 * info.Age));
             }
@@ -139,76 +139,76 @@ namespace Proyecto_Progra_MVC.Controllers
                 calculate.basal = (int)(655 + (9.6 * info.Weight) + (1.8 * info.Height) - (4.7 * info.Age));
             }
 
-            //PhysicalActivity utEnum = Enum.Parse(PhysicalActivity, info.PhysicalActivity, true);
-            //switch (utEnum)
-            //{
-            //    case 1:
-            //        calculate.calorias = (int)(calculate.basal * 1.2);
-            //        if (info.Gender.Equals(1))
-            //        {
-            //            calculate.bajar = calculate.calorias - 337;
-            //            calculate.subir = calculate.calorias + 337;
-            //        }
-            //        else
-            //        {
-            //            calculate.bajar = calculate.calorias - 293;
-            //            calculate.subir = calculate.calorias + 293;
-            //        }
-            //        break;
-            //    case 2:
-            //        calculate.calorias = (int)(calculate.basal * 1.375);
-            //        if (info.Gender.Equals(1))
-            //        {
-            //            calculate.bajar = calculate.calorias - 386;
-            //            calculate.subir = calculate.calorias + 386;
-            //        }
-            //        else
-            //        {
-            //            calculate.bajar = calculate.calorias - 336;
-            //            calculate.subir = calculate.calorias + 336;
-            //        }
-            //        break;
-            //    case 3:
-            //        calculate.calorias = (int)(calculate.basal * 1.55);
-            //        if (info.Gender.Equals(1))
-            //        {
-            //            calculate.bajar = calculate.calorias - 435;
-            //            calculate.subir = calculate.calorias + 435;
-            //        }
-            //        else
-            //        {
-            //            calculate.bajar = calculate.calorias - 378;
-            //            calculate.subir = calculate.calorias + 378;
-            //        }
-            //        break;
-            //    case 4:
-            //        calculate.calorias = (int)(calculate.basal * 1.725);
-            //        if (info.Gender.Equals(1))
-            //        {
-            //            calculate.bajar = calculate.calorias - 484;
-            //            calculate.subir = calculate.calorias + 484;
-            //        }
-            //        else
-            //        {
-            //            calculate.bajar = calculate.calorias - 421;
-            //            calculate.subir = calculate.calorias + 421;
-            //        }
-            //        break;
-            //    case 5:
-            //        calculate.calorias = (int)(calculate.basal * 1.9);
-            //        if (info.Gender.Equals(1))
-            //        {
-            //            calculate.bajar = calculate.calorias - 533;
-            //            calculate.subir = calculate.calorias + 533;
-            //        }
-            //        else
-            //        {
-            //            calculate.bajar = calculate.calorias - 463;
-            //            calculate.subir = calculate.calorias + 463;
-            //        }
-            //        break;
-            //}
-
+            if (info.PhysicalActivity.Equals(PhysicalActivity.SEDENTARY))
+            {
+                calculate.calorias = (int)(calculate.basal * 1.2);
+                if (info.Equals(Genders.MALE))
+                {
+                    calculate.bajar = calculate.calorias - 337;
+                    calculate.subir = calculate.calorias + 337;
+                }
+                else
+                {
+                    calculate.bajar = calculate.calorias - 293;
+                    calculate.subir = calculate.calorias + 293;
+                }
+            }
+            else if (info.PhysicalActivity.Equals(PhysicalActivity.LIGHT))
+            {
+                calculate.calorias = (int)(calculate.basal * 1.375);
+                if (info.Equals(Genders.MALE))
+                {
+                    calculate.bajar = calculate.calorias - 386;
+                    calculate.subir = calculate.calorias + 386;
+                }
+                else
+                {
+                    calculate.bajar = calculate.calorias - 336;
+                    calculate.subir = calculate.calorias + 336;
+                }
+            }
+            else if (info.PhysicalActivity.Equals(PhysicalActivity.MODERATE))
+            {
+                calculate.calorias = (int)(calculate.basal * 1.55);
+                if (info.Equals(Genders.MALE))
+                {
+                    calculate.bajar = calculate.calorias - 435;
+                    calculate.subir = calculate.calorias + 435;
+                }
+                else
+                {
+                    calculate.bajar = calculate.calorias - 378;
+                    calculate.subir = calculate.calorias + 378;
+                }
+            }
+            else if (info.PhysicalActivity.Equals(PhysicalActivity.INTENSE))
+            {
+                calculate.calorias = (int)(calculate.basal * 1.725);
+                if (info.Equals(Genders.MALE))
+                {
+                    calculate.bajar = calculate.calorias - 484;
+                    calculate.subir = calculate.calorias + 484;
+                }
+                else
+                {
+                    calculate.bajar = calculate.calorias - 421;
+                    calculate.subir = calculate.calorias + 421;
+                }
+            }
+            else
+            {
+                calculate.calorias = (int)(calculate.basal * 1.9);
+                if (info.Equals(Genders.MALE))
+                {
+                    calculate.bajar = calculate.calorias - 533;
+                    calculate.subir = calculate.calorias + 533;
+                }
+                else
+                {
+                    calculate.bajar = calculate.calorias - 463;
+                    calculate.subir = calculate.calorias + 463;
+                }
+            }
             return View(calculate);
         }
 
