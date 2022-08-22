@@ -129,6 +129,7 @@
                             <a class="" asp-controller="Administration" asp-action="Index">Administration</a>
                             </li>*@
 
+
                                 @if (User.IsInRole("Administrators"))
                                 {
                                     <li class="">
@@ -138,6 +139,7 @@
                                     <li class="">
                                         <a class="" asp-controller="User" asp-action="Index">Users</a>
                                     </li>
+
                                 }
 
                                 @if (User.IsInRole("Client"))
@@ -146,7 +148,7 @@
                                 }
 
                                 <li class="">
-                                        <a class="" asp-controller="User" asp-action="Index">Users</a>
+                                    <a class="" asp-controller="User" asp-action="Index">Users</a>
                                 </li>
 
                                 <li class="">
@@ -207,23 +209,23 @@
                         </div>
                     </div>
                     @*<div class="col-lg-4 col-md-6">
-                        <div class="fs-widget">
-                            <h4>Tips & Guides</h4>
-                            <div class="fw-recent">
-                                <h6><a href="#">Physical fitness may help prevent depression, anxiety</a></h6>
-                                <ul>
-                                    <li>3 min read</li>
-                                    <li>20 Comment</li>
-                                </ul>
-                            </div>
-                            <div class="fw-recent">
-                                <h6><a href="#">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
-                                <ul>
-                                    <li>3 min read</li>
-                                    <li>20 Comment</li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="fs-widget">
+                    <h4>Tips & Guides</h4>
+                    <div class="fw-recent">
+                    <h6><a href="#">Physical fitness may help prevent depression, anxiety</a></h6>
+                    <ul>
+                    <li>3 min read</li>
+                    <li>20 Comment</li>
+                    </ul>
+                    </div>
+                    <div class="fw-recent">
+                    <h6><a href="#">Fitness: The best exercise to lose belly fat and tone up...</a></h6>
+                    <ul>
+                    <li>3 min read</li>
+                    <li>20 Comment</li>
+                    </ul>
+                    </div>
+                    </div>
                     </div>*@
                 </div>
                 <div class="row">
