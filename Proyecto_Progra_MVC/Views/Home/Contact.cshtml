@@ -1,0 +1,39 @@
+﻿@model IndexViewModel
+
+    <!-- Contact Section Begin -->
+    <section class="contact-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-title contact-title">
+                        <span>Contact Us</span>
+                        <h2>GET IN TOUCH</h2>
+                    </div>
+                    <div class="contact-widget">
+                        <div class="leave-comment">
+                        <form id="request" class="main_form" method="post">
+                            <div class="row">
+                            <div class="col-md-12 ">
+                                <input asp-for="correoElectronico.Asunto" class="contactus" placeholder="Nombre" > 
+                            </div>
+                            <div class="col-md-12">
+                                <input asp-for="correoElectronico.Destinatario" class="contactus" placeholder=" Email" >                          
+                            </div>
+                            <div class="col-md-12">
+                                <textarea asp-for="correoElectronico.Cuerpo" class="textarea" placeholder="Mensaje" type="type" Message="Name">Mensaje </textarea>
+                            </div>
+                            <div class="col-sm-12">
+                                <button type="submit" class="send_btn">Enviar</button>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    
+                </div>
+            </div>            
+        </div>
+    </section>
+    <!-- Contact Section End -->
