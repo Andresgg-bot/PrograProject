@@ -19,7 +19,5 @@ namespace Proyecto_Progra_MVC.Domain.Models.Entities
         [Required]
         public string Lastname { get; set; }
 
-        //public Calories Calories { get; set; }
-
     }
 }
