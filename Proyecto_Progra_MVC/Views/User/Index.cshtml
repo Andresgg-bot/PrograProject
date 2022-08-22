@@ -1,47 +1,54 @@
 ﻿@model List<User>
 
 <section class="class-timetable-section spad">
-<div class="row">
-    <div class="col-6">
-        <h3>Users list</h3>
-    </div>
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 section-title">
+                <h2>Users list</h2>
+            </div>
+        </div>
+        <br />
 
-<br />
-<div>
-    <table class="table" id="progress" style="width:100%">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Lastname</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var user in Model)
-            {
-                <tr id="progress_@user.Id">
-                    <td>@user.Name</td>
-                    <td>@user.Lastname</td>
-                    <td>@user.Email</td>
-                    <td>
-                        <div class="text-center">
-                            <a href="/user/updateuser/@user.Id" class="btn btn-outline-info" style="cursor:pointer">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </a>
-                            <a onclick=Delete("@user.Id") class="btn btn-outline-danger" style="cursor:pointer">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
-                            <a href="/requests/requests/@user.Id" class="btn btn-outline-success" style="cursor:pointer">
-                                <i class="fa-solid fa-car"></i>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="class-timetable">
+                    <table  style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Lastname</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+                                <tr id="progress_@user.Id">
+                                    <td><p>@user.Name</p></td>
+                                    <td><p>@user.Lastname</p></td>
+                                    <td><p>@user.Email</p></td>
+                                    <td>
+                                        <div class="text-center">
+                                            <a href="/user/updateuser/@user.Id" class="btn btn-outline-info" style="cursor:pointer">
+                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            </a>
+                                            <a onclick=Delete("@user.Id") class="btn btn-outline-danger" style="cursor:pointer">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                            <a href="/requests/requests/@user.Id" class="btn btn-outline-success" style="cursor:pointer">
+                                                <i class="fa-solid fa-car"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <script>

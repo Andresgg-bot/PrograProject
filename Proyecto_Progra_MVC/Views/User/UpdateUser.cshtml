@@ -1,55 +1,57 @@
 ﻿@model User
 
-<section class="class-timetable-section spad">
-<div class="form-row">
-    <div class="form-group col-5">
-        <form method="post">
-            <div class="form-group header">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <h3>User</h3>
-            </div>
-            <div class="form-group">
-                <div class="clearfix separator"></div>
-            </div>
-
-            <div class="form-group inputs">
-
-                <input asp-for="Id" class="form-control" hidden/>
-
-                <label asp-for="Name"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-
-
-                <label asp-for="Lastname"></label>
-                <input asp-for="Lastname" class="form-control" />
-                <span asp-validation-for="Lastname" class="text-danger"></span>
-
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-
-                <input asp-for="UserName" class="form-control" hidden/>
-
-                <input asp-for="PasswordHash" class="form-control" hidden/>
-
-            </div>
-            <div class="form-group row">
-                <div class="col-8 offset-4">
-                    <div class="row">
-                        <div class="col">
-                            <button type="submit" class="btn btn-outline-info" form-control">Save</button>
-                        </div>
-                        <div class="col">
-                            <a asp-action="Index" class="btn btn-outline-dark" form-control">Back</a>
-                        </div>
-                    </div>
+<section class="contact-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="section-title contact-title">
+                    <h2>User</h2>
                 </div>
+                <form method="post">
+                    <div class="form-group header">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>                        
+                    </div>
+                    <div class="form-group">
+                        <div class="clearfix separator"></div>
+                    </div>
+
+                    <div class="form-group inputs">
+
+                        <input asp-for="Id" class="form-control" type="hidden"/>
+
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+
+
+                        <label asp-for="Lastname"></label>
+                        <input asp-for="Lastname" class="form-control" />
+                        <span asp-validation-for="Lastname" class="text-danger"></span>
+
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+
+                        <input asp-for="UserName" class="form-control"type="hidden"/>
+
+                        <input asp-for="PasswordHash" class="form-control" type="hidden"/>
+
+                    </div>
+                    
+                        <div class="">
+                                <div class="col-lg-6">
+                                    <a asp-action="Index" class="btn btn-outline-dark" form-control">Back</a>
+                                </div>
+                                <div class="">
+                                    <button type="submit" class="btn btn-outline-info" form-control">Save</button>
+                                </div>
+                        </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
-</div>
 </section>
+
 
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />
