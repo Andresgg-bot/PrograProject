@@ -27,7 +27,8 @@ namespace Proyecto_Progra_MVC.Infraestructure
                     .AddUnitOfWork<ApplicationDbContext>()
                     .AddRepository<Measures, MeasuresRepository>()
                     .AddRepository<User, UserRepository>()
-                    .AddRepository<Info, InfoRepository>();
+                    .AddRepository<Info, InfoRepository>()
+                    .AddRepository<Supplements, SupplementsRepository>();
 
             services.AddScoped<IApplicationDbContext>
                 (options => options.GetService<ApplicationDbContext>());
