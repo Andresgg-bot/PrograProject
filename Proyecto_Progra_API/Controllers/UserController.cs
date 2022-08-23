@@ -33,7 +33,7 @@ namespace Proyecto_Progra_API.Controllers
             {
                 return Ok(allUsers);
             }
-            return BadRequest("There are not users");
+            return BadRequest("There are no users");
         }
 
         [HttpGet]

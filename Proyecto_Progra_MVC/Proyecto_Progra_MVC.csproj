@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Proyecto_Progra_MVC.Infraestructure\Proyecto_Progra_MVC.Infraestructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\supplements\" />
+  </ItemGroup>
+
 </Project>
