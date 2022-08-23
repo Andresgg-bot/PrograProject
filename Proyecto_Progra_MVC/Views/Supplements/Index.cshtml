@@ -6,12 +6,16 @@
             <div class="col-6 section-title">
                 <h2>Supplements list</h2>
             </div>
-            <div class="col-6 text-right">
+        </div>
+        @if (User.IsInRole("Administrators"))
+        {
+            <div class="col-12 text-right">
                 <a href="/supplements/upsert/" class="btn btn-outline-info">
                     <i class="fas fa-plus"></i> &nbsp; Add Supplements
                 </a>
             </div>
-        </div>
+        }
+
         <br />
 
         <div class="row">
