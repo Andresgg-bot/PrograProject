@@ -19,6 +19,13 @@
     <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="~/css/style.css" type="text/css">
 
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+          data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <script src="~/js/sweetalert2.all.min.js"></script>
+    <link href="~/css/sweetalert2.css" rel="stylesheet" />
+
 </head>
 <body class="main-layout">
 
@@ -46,12 +53,6 @@
                 }
                 else
                 {
-                    @*<li class="">
-                <a class="" asp-area="" asp-controller="User" asp-action="Profile">@User.Identity.Name</a>
-                </li>*@
-                    @*<li class="">
-                <a class="" asp-area="" asp-controller="Progress" asp-action="Index">Progress</a>
-                </li>*@
 
                     <li class="">
                         <form asp-controller="Auth" asp-action="Logout" method="post">
@@ -118,18 +119,6 @@
                             }
                             else
                             {
-                                @*<li class="">
-                            <a class="" asp-area="" asp-controller="User" asp-action="Profile">@User.Identity.Name</a>
-                            </li>*@
-                                @*<li class="">
-                            <a class="" asp-area="" asp-controller="Progress" asp-action="Index">Progress</a>
-                            </li>*@
-
-                                @*<li class="">
-                            <a class="" asp-controller="Administration" asp-action="Index">Administration</a>
-                            </li>*@
-
-
                                 @if (User.IsInRole("Administrators"))
                                 {
                                     <li class="">
@@ -140,12 +129,22 @@
                                         <a class="" asp-controller="User" asp-action="Index">Users</a>
                                     </li>
 
+                                    <li class="">
+                                        <a class="" asp-controller="Supplements" asp-action="Index">Supplements</a>
+                                    </li>
+
                                 }
 
                                 @if (User.IsInRole("Client"))
                                 {
-
+                                    <li class="">
+                                        <a class="" asp-controller="User" asp-action="Index">Users</a>
+                                    </li>
                                 }
+
+                                <li class="">
+                                    <a class="" asp-controller="Supplements" asp-action="Index">Supplements</a>
+                                </li>
 
                                 <li class="">
                                     <a class="" asp-controller="User" asp-action="Index">Users</a>
@@ -272,8 +271,13 @@
     <script src="~/js/jquery.slicknav.js"></script>
     <script src="~/js/owl.carousel.min.js"></script>
     <script src="~/js/main.js"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
     <script src="https://kit.fontawesome.com/b416e27152.js" crossorigin="anonymous"></script>
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

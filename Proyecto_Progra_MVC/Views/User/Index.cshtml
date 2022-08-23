@@ -18,7 +18,7 @@
                                 <th>Name</th>
                                 <th>Lastname</th>
                                 <th>Email</th>
-                                <th>Actions</th>
+                                <th>Admin Actions</th>
                                 <th>Progress Actions</th>
 
                             </tr>
@@ -35,9 +35,9 @@
                                             <a href="/user/updateuser/@user.Id" class="btn btn-outline-info" style="cursor:pointer">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
-                                            <a onclick=Delete("@user.Id") class="btn btn-outline-danger" style="cursor:pointer">
+                                            @*<a onclick=Delete("@user.Id") class="btn btn-outline-danger" style="cursor:pointer">
                                                 <i class="fa-solid fa-trash" style="color:white";></i>
-                                            </a>
+                                            </a>*@
                                         </div>
                                     </td>
                                     <td>
@@ -60,7 +60,7 @@
     </div>
 </section>
 
-<script>
+@*<script>
     function Delete(id) {
         swal({
             title: "Are you sure to want to delete this vehicle?",
@@ -86,4 +86,4 @@
             }
         });
     }
-</script>
+</script>*@
