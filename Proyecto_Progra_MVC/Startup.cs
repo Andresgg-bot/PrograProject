@@ -86,6 +86,7 @@ namespace Proyecto_Progra_MVC
                 (options => options.GetService<ApplicationDbContext>());*/
 
             services.AddScoped<IUserServices, UserService>();
+            services.AddScoped<ISupplementsServices, SupplementsService>();
 
 
             services.Configure<RecaptchaConfiguration>(Configuration.GetSection("RecaptchaConfiguration"));
