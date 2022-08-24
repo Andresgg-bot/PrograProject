@@ -176,16 +176,23 @@
                             <h4>Useful links</h4>
                             <ul>
                                 <li><a href="#">About</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="/Home/Contact">Contact</a></li>
                             </ul>
                         </div>
                     </div>
+
                     <div class="col-lg-2 col-md-3 col-sm-6">
                         <div class="fs-widget">
                             <h4>Support</h4>
                             <ul>
-                                <li><a asp-controller="Auth" asp-action="Login">Login</a></li>
-                                <li><a href="#">My account</a></li>
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <li><a asp-controller="Auth" asp-action="Login">Login</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="#">My account</a></li>
+                                }
                             </ul>
                         </div>
                     </div>
