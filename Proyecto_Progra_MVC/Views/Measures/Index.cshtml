@@ -1,0 +1,111 @@
+﻿@using Proyecto_Progra_MVC.Application.Handlers
+@using Microsoft.AspNetCore.Authorization
+@model List<Measures>
+
+@{
+    var idUser = ViewBag.idUser;
+}
+
+<section class="class-timetable-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 section-title">
+                <h2>Users Measures</h2>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-lg-12">
+
+                @if (User.IsInRole("Administrator"))
+                {
+                    @if(idUser != null){
+                        <a href="/measures/measuresregister/@idUser" class="btn btn-success text-white" style="cursor:pointer">
+                            <i class="fas fa-plus"></i> Add
+                        </a>
+                        <br />
+                    }  
+                }                                      
+                <div class="class-timetable">
+                    <table id="measures"  style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Left Arm</th>
+                                <th>Right Arm</th>
+                                <th>Left leg</th>
+                                <th>Right leg</th>
+                                <th>Waist</th>
+                                <th>Chest</th>
+                                <th>Date</th>                                
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var measure in Model)
+                            {
+                                <tr id="measure_@measure.IdMeasure">
+                                    <td><p>@measure.User.Name @measure.User.Lastname</p></td>
+                                    <td><p>@measure.LeftArm</p></td>
+                                    <td><p>@measure.RightArm</p></td>
+                                    <td><p>@measure.LeftLeg</p></td>
+                                    <td><p>@measure.RightLeg</p></td>
+                                    <td><p>@measure.Waist</p></td>
+                                    <td><p>@measure.Chest</p></td>
+                                    <td><p>@measure.MeasureDate</p></td>                                   
+                                    <td>
+                                        <div class="text-center">
+                                            @inject IAuthorizationService _authorizationService
+                                            @if ((await _authorizationService.AuthorizeAsync(User, PermissionTypesNames.WRITEROLES)).Succeeded)
+                                            {
+                                                <a href="/measures/update/@measure.IdMeasure" class="btn btn-warning text-white" style="cursor:pointer">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            }
+                                            @if (User.IsInRole("Administrator"))
+                                            {
+                                                <a onclick=Delete("@measure.IdMeasure") class="btn btn-danger text-white" style="cursor:pointer">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </a>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+
+    function Delete(id) {
+        swal({
+            title: "Are you sure you want to delete the measures?",
+            text: "The data cannot be recovered you do not see that it has been deleted!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "/measures/delete/" + id,
+                    success: function (data) {
+                        if (data.success) {
+                            toastr.success(data.message);
+                            $("#measure_" + id).remove();
+                        }
+                        else {
+                            toastr.error(data.message);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+</script>
