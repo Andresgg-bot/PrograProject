@@ -27,6 +27,9 @@ namespace Proyecto_Progra_MVC.Domain.Models.Entities
 
         public DateTime MeasureDate { get; set; }
 
+        [ForeignKey("User")]
+        public string UserId { get; set; }
+
         public User User { get; set; }
 
     }

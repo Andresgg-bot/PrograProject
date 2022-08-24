@@ -10,7 +10,7 @@
         @if (User.IsInRole("Administrators"))
         {
             <div class="col-12 text-right">
-                <a href="/supplements/upsert/" class="btn btn-outline-info">
+                <a href="/supplements/upsert/" class="btn btn-outline-light">
                     <i class="fas fa-plus"></i> &nbsp; Add Supplements
                 </a>
             </div>
@@ -42,7 +42,7 @@
                                     <td><img src="@supplements.Photo" alt="" width="100"></td>
                                     <td>
                                         <div class="text-center">
-                                            <a href="/supplements/upsert/@supplements.Id" class="btn btn-outline-info" style="cursor:pointer">
+                                            <a href="/supplements/upsert/@supplements.Id" class="btn btn-outline-light" style="cursor:pointer">
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                             </a>
                                             <a onclick=Delete("@supplements.Id") class="btn btn-outline-danger" style="cursor:pointer">

@@ -1,0 +1,119 @@
+﻿@using Proyecto_Progra_MVC.Domain.Models.Enum
+@model Measures
+
+@{
+    var titulo = "Measures register";
+}
+
+
+<section class="contact-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="leave-comment">
+                    <form method="post">
+                        <div class="row">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="section-title">
+                                <h2 >@titulo</h2>
+                            </div>
+                            <div class="col-8 pt-4">
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <p><label asp-for="LeftArm"></label></p>
+                                    </div>
+                                    <div class="col-8">
+                                        <input asp-for="LeftArm" class="form-control" />
+                                        <span asp-validation-for="LeftArm" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <p><label asp-for="RightArm"></label></p>
+                                    </div>
+                                    <div class="col-8">
+                                        <input asp-for="RightArm" class="form-control" />
+                                        <span asp-validation-for="RightArm" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <p><label asp-for="LeftLeg"></label></p>
+                                    </div>
+                                    <div class="col-8">
+                                        <input asp-for="LeftLeg" class="form-control" />
+                                        <span asp-validation-for="LeftLeg" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <p><label asp-for="RightLeg"></label></p>
+                                    </div>
+                                    <div class="col-8">
+                                        <input asp-for="RightLeg" class="form-control" />
+                                        <span asp-validation-for="RightLeg" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <p><label asp-for="Waist"></label></p>
+                                    </div>
+                                    <div class="col-8">
+                                        <input asp-for="Waist" class="form-control" />
+                                        <span asp-validation-for="Waist" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <p><label asp-for="Chest"></label></p>
+                                    </div>
+                                    <div class="col-8">
+                                        <input asp-for="Chest" class="form-control" />
+                                        <span asp-validation-for="Chest" class="text-danger"></span>
+                                    </div>
+                                </div>                                                                
+                                <div class="form-group row">
+                                    <div class="col-4">
+                                        <p><label asp-for="MeasureDate">Date</label></p>
+                                    </div>
+                                    <div class="col-8">
+                                        <input asp-for="MeasureDate" class="form-control" />
+                                        <span asp-validation-for="MeasureDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row" hidden>
+                                    <div class="col-4">
+                                        <label asp-for="UserId"></label>
+                                    </div>
+                                    <div class="col-8">
+                                        <input asp-for="UserId" class="form-control" />
+                                        <span asp-validation-for="UserId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-8 offset-4">
+                                        <div class="row">                                            
+                                            <div class="col">
+                                                <a href="/user/Index" class="btn btn-success form-control">Cancel</a>
+                                            </div>
+                                            <div class="col">
+                                                <button type="submit" class="btn btn-primary form-control">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+<partial name="_ValidationScriptsPartial" />
+}
+

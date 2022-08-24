@@ -26,4 +26,10 @@
     <Folder Include="wwwroot\img\supplements\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Views\Measures\Index.cshtml" />
+    <None Include="Views\Measures\MeasuresRegister.cshtml" />
+    <None Include="Views\Measures\Update.cshtml" />
+  </ItemGroup>
+
 </Project>
