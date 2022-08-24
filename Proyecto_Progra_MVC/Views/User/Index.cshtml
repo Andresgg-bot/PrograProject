@@ -18,7 +18,8 @@
                                 <th>Name</th>
                                 <th>Lastname</th>
                                 <th>Email</th>
-                                <th>Progress Actions</th>
+                                <th>Progress</th>
+                                <th>Measures</th>
                                 @if (User.IsInRole("Administrators"))
                                 {
                                     <th>Admin Actions</th>
@@ -35,14 +36,21 @@
                                     <td><p>@user.Email</p></td>
                                     <td>
                                         <div class="text-center">
-                                            <a href="/measures/index/@user.Id" class="btn btn-outline-warning" style="cursor:pointer">
-                                                <i class="fa-solid fa-ruler"></i> Measures
+                                            <a href="/info/index/@user.Id" class="btn btn-outline-light" style="cursor:pointer">
+                                                <i class="fa-solid fa-heart-circle-exclamation"></i> View progress
                                             </a>
-                                            <a href="/info/index/@user.Id" class="btn btn-outline-info" style="cursor:pointer">
-                                                <i class="fa-solid fa-heart-circle-exclamation"></i> Progress
-                                            </a>
-                                            <a href="/info/inforegister/@user.Id" class="btn btn-outline-success" style="cursor:pointer">
+                                            <a href="/info/inforegister/@user.Id" class="btn btn-outline-warning" style="cursor:pointer">
                                                 <i class="fa-solid fa-heart-circle-plus"></i> Add progress
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="text-center">
+                                            <a href="/measures/index/@user.Id" class="btn btn-outline-light" style="cursor:pointer">
+                                                <i class="fa-solid fa-list-check"></i> View measures
+                                            </a>
+                                            <a href="/measures/measuresregister/@user.Id" class="btn btn-outline-warning" style="cursor:pointer">
+                                                <i class="fa-solid fa-ruler"></i> Add measures
                                             </a>
                                         </div>
                                     </td>
@@ -53,9 +61,6 @@
                                                 <a href="/user/updateuser/@user.Id" class="btn btn-outline-info" style="cursor:pointer">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
-                                                @*<a onclick=Delete("@user.Id") class="btn btn-outline-danger" style="cursor:pointer">
-                                                    <i class="fa-solid fa-trash" style="color:white";></i>
-                                                    </a>*@
                                             </div>
                                         </td>
                                     }
