@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Proyecto_Progra_MVC.Components;
 using Proyecto_Progra_MVC.Contracts;
 using Proyecto_Progra_MVC.Domain.Models.ConfigurationModels;
 using Proyecto_Progra_MVC.Domain.Models.Entities;
 using Proyecto_Progra_MVC.Domain.Models.InputModels;
+using Proyecto_Progra_MVC.Domain.Models.PlainModels;
 using Proyecto_Progra_MVC.Domain.Models.ViewModels;
 using System;
 using System.Net;
@@ -16,19 +18,21 @@ namespace Proyecto_Progra_MVC.Controllers
     [Route("auth")]
     public class AuthController : Controller
     {
-        RecaptchaConfiguration Recaptcha;
-        IRecaptchaValidator Validator;
-        readonly UserManager<User> _userManager;
-        readonly SignInManager<User> _signInManager;
-
         public AuthController(IOptions<RecaptchaConfiguration> options, IRecaptchaValidator validator,
-            UserManager<User> userManager, SignInManager<User> sessionManager)
+            UserManager<User> userManager, SignInManager<User> sessionManager, ICartero cartero)
         {
             Recaptcha = options.Value;
             Validator = validator;
             _userManager = userManager;
             _signInManager = sessionManager;
+            Cartero = cartero;
         }
+
+        RecaptchaConfiguration Recaptcha;
+        IRecaptchaValidator Validator;
+        readonly UserManager<User> _userManager;
+        readonly SignInManager<User> _signInManager;
+        ICartero Cartero;
 
         [HttpGet]
         [Route("register")]
@@ -169,6 +173,16 @@ namespace Proyecto_Progra_MVC.Controllers
                             WebUtility.UrlEncode(email),
                             "&token=",
                             WebUtility.UrlEncode(token)
+                        );
+
+                    Cartero.Enviar
+                        (
+                            new CorreoElectronico
+                            {
+                                Destinatario = email,
+                                Asunto = "Reset your password",
+                                Cuerpo = "Click the link below to reset your password. \n" + "https://localhost:5001" + resetPasswordUri,
+                            }
                         );
                 }
 
