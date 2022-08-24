@@ -9,7 +9,7 @@
                 </div>
                 <form method="post" enctype="multipart/form-data" asp-action="Upsert">
 
-                    <input asp-for="Photo" class="form-control" hidden />
+                    <input asp-for="Photo" class="form-control" type="hidden" />
                     <div class="form-group header">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     </div>
@@ -19,35 +19,38 @@
 
                     <div class="form-group inputs">
 
-                        <input asp-for="Id" class="form-control" hidden />
+                        <input asp-for="Id" class="form-control" type="hidden" />
 
-                        <label asp-for="Name"></label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                        <div class="form-group">
+                            <p><label asp-for="Name"></label></p>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
 
+                        <div class="form-group">
+                            <p><label asp-for="Description"></label></p>
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
 
-                        <label asp-for="Description"></label>
-                        <input asp-for="Description" class="form-control" />
-                        <span asp-validation-for="Description" class="text-danger"></span>
+                        <div class="form-group">
+                            <p><label asp-for="Price"></label></p>
+                            <input asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
 
-                        <label asp-for="Price"></label>
-                        <input asp-for="Price" class="form-control" />
-                        <span asp-validation-for="Price" class="text-danger"></span>
-
-                        <br />
-                        <div class="form-group row">
-                            <div class="col-sm-12 align-items-center">
-                                <input name="file" type="file" class="form-control form-control-user" />
-                            </div>
+                        <div class="form-group">
+                            <p><label>Picture</label></p>
+                            <input name="file" type="file" class="form-control form-control-user" />
                         </div>
                     </div>
 
-                    <div class="">
-                        <div class="col-lg-6">
-                            <a asp-action="Index" class="btn btn-outline-dark" form-control">Back</a>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <a asp-action="Index" class="btn btn-primary" form-control">Back</a>
                         </div>
-                        <div class="">
-                            <button type="submit" class="btn btn-outline-info" form-control">Save</button>
+                        <div class="col-lg-3">
+                            <button type="submit" class="btn btn-success" form-control">Save</button>
                         </div>
                     </div>
                 </form>
@@ -58,5 +61,5 @@
 
 
 @section Scripts{
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
     }
