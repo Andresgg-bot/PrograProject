@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Proyecto_Progra_MVC.Application.Handlers;
 using Proyecto_Progra_MVC.Domain.Models.Entities;
 using Proyecto_Progra_MVC.Domain.Models.Enum;
 using Proyecto_Progra_MVC.Domain.Models.ViewModels;
@@ -22,6 +24,7 @@ namespace Proyecto_Progra_MVC.Controllers
         readonly IRepository<Measures> _repository;
         readonly IRepository<User> _userManager;
 
+        [Authorize(Policy = PermissionTypesNames.VIEWROLES)]
         public IActionResult Index(string id)
         {
             List<Measures> model = new List<Measures>();
@@ -49,7 +52,7 @@ namespace Proyecto_Progra_MVC.Controllers
             return View(measuresViewModel);
         }
 
-
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         [HttpGet]
         public IActionResult MeasuresRegister(string id)
         {
@@ -60,6 +63,7 @@ namespace Proyecto_Progra_MVC.Controllers
             return View(measure);
         }
 
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult MeasuresRegister(Measures measure)
@@ -78,6 +82,7 @@ namespace Proyecto_Progra_MVC.Controllers
             return View(measure);
         }
 
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         [HttpGet]
         public IActionResult Update(int id)
         {
@@ -89,6 +94,7 @@ namespace Proyecto_Progra_MVC.Controllers
             return View(measure);
         }
 
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Update(Measures measure)
@@ -105,6 +111,7 @@ namespace Proyecto_Progra_MVC.Controllers
             return View(measure);
         }
 
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         [HttpDelete]
         public IActionResult Delete(int id)
         {

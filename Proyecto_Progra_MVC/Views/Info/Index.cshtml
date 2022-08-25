@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="class-timetable">
-                    <table id="info"  style="width:100%">
+                    <table id="info" style="width:100%">
                         <thead>
                             <tr>
                                 <th>User</th>
@@ -25,7 +25,11 @@
                                 <th>Physical Activity</th>
                                 <th>Date</th>
                                 <th>Calorie Calculator</th>
-                                <th></th>
+                                @inject IAuthorizationService _authorizationService
+                                @if ((await _authorizationService.AuthorizeAsync(User, PermissionTypesNames.WRITEROLES)).Succeeded)
+                                {
+                                    <th>Actions</th>
+                                }
                             </tr>
                         </thead>
                         <tbody>
@@ -46,23 +50,23 @@
                                             </a>
                                         </div>
                                     </td>
-                                    <td>
-                                        <div class="text-center">
-                                            @inject IAuthorizationService _authorizationService
-                                            @if ((await _authorizationService.AuthorizeAsync(User, PermissionTypesNames.WRITEROLES)).Succeeded)
-                                            {
+                                    @if ((await _authorizationService.AuthorizeAsync(User, PermissionTypesNames.WRITEROLES)).Succeeded)
+                                    {
+                                        <td>
+                                            <div class="text-center">
+
                                                 <a href="/info/update/@info.IdInfo" class="btn btn-success text-white" style="cursor:pointer">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                            }
-                                            @if (User.IsInRole("Administrator"))
-                                            {
+
+
                                                 <a onclick=Delete("@info.IdInfo") class="btn btn-danger text-white" style="cursor:pointer">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </a>
-                                            }
-                                        </div>
-                                    </td>
+
+                                            </div>
+                                        </td>
+                                    }
                                 </tr>
                             }
                         </tbody>
@@ -86,7 +90,7 @@
                 $.ajax({
                     type: "DELETE",
                     url: "/info/delete/" + id,
-                    success: function (data) {
+                    success: function(data) {
                         if (data.success) {
                             toastr.success(data.message);
                             $("#info_" + id).remove();

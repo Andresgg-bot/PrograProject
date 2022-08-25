@@ -24,7 +24,7 @@ namespace Proyecto_Progra_MVC.Controllers
         readonly RoleManager<IdentityRole> _roleManager;
         readonly UserManager<User> _userManager;
 
-        //[Authorize(Policy = PermissionTypesNames.VIEWROLES)]
+        [Authorize(Policy = PermissionTypesNames.VIEWROLES)]
         public IActionResult Index()
         {
             RoleViewModel model =
@@ -41,7 +41,7 @@ namespace Proyecto_Progra_MVC.Controllers
         [HttpGet]
         [Route("[action]")]
         [Route("[action]/{id}")]
-        //[Authorize(Policy = PermissionTypesNames.WRITEROLES)]
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         public async Task<IActionResult> Upsert(string id = null)
         {
             Role role = new Role();
@@ -65,7 +65,7 @@ namespace Proyecto_Progra_MVC.Controllers
         [HttpPost]
         [Route("[action]")]
         [Route("[action]/{id}")]
-        //[Authorize(Policy = PermissionTypesNames.WRITEROLES)]
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         public async Task<IActionResult> Upsert(Role model, string id = null)
         {
             if (ModelState.IsValid)
@@ -100,7 +100,7 @@ namespace Proyecto_Progra_MVC.Controllers
 
         [HttpGet]
         [Route("[action]/{id}")]
-        //[Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
+        [Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
         public async Task<IActionResult> UsersRole(string id)
         {
             UserRoleViewModel model = 
@@ -138,7 +138,7 @@ namespace Proyecto_Progra_MVC.Controllers
 
         [HttpPost]
         [Route("[action]/{id}")]
-        //[Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
+        [Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
         public async Task<IActionResult> UsersRole(UserRoleViewModel model, string id)
         {
             if (string.IsNullOrEmpty(id))
@@ -182,7 +182,7 @@ namespace Proyecto_Progra_MVC.Controllers
         [HttpGet]
         [Route("[action]")]
         [Route("[action]/{id}")]
-        //[Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
+        [Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
         public async Task<IActionResult> Delete(string id = null)
         {
             Role role = new Role();
@@ -206,7 +206,7 @@ namespace Proyecto_Progra_MVC.Controllers
         [HttpPost]
         [Route("[action]")]
         [Route("[action]/{id}")]
-        //[Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
+        [Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
         public async Task<IActionResult> Delete(Role model, string id = null)
         {
             if (ModelState.IsValid)
@@ -237,7 +237,7 @@ namespace Proyecto_Progra_MVC.Controllers
 
         [HttpGet]
         [Route("userlist")]
-        //[Authorize(Policy = PermissionTypesNames.VIEWROLES)]
+        [Authorize(Policy = PermissionTypesNames.VIEWROLES)]
         public async Task<IActionResult> UserList()
         {
 
@@ -261,7 +261,7 @@ namespace Proyecto_Progra_MVC.Controllers
         [HttpGet]
         [Route("[action]")]
         [Route("[action]/{id}")]
-        //[Authorize(Policy = PermissionTypesNames.WRITEROLES)]
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         public async Task<IActionResult> EditRole(string id)
         {
             ViewBag.Id = id;
@@ -295,7 +295,7 @@ namespace Proyecto_Progra_MVC.Controllers
         [HttpPost]
         [Route("[action]")]
         [Route("[action]/{id}")]
-        //[Authorize(Policy = PermissionTypesNames.WRITEROLES)]
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         public async Task<IActionResult> EditRole(List<UserRoleViewModel> viewModel, string id)
         {
             var user = await _userManager.FindByIdAsync(id);
