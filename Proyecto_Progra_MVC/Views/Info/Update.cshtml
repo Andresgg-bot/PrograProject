@@ -14,7 +14,7 @@
                         <div class="row p-3 border">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="col-12 border-bottom">
-                                <h2 class="text-primary">@titulo</h2>
+                                <h2 class="text-light">@titulo</h2>
                             </div>
                             <div class="col-8 pt-4">
                                 <div class="form-group row">
@@ -92,7 +92,7 @@
                                     <div class="col-4">
                                         <p><label asp-for="UserId">User</label></p>
                                     </div>
-                                    <div class="col-8">
+                                    <div class="col-8" style="color:#FFFF">
                                         <input asp-for="UserId" class="form-control" hidden />
                                         @Model.User.Email | @Model.User.Name @Model.User.Lastname
                                         <span asp-validation-for="UserId" class="text-danger"></span>

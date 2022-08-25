@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Proyecto_Progra_MVC.Application.Handlers;
 using Proyecto_Progra_MVC.Domain.Models.Entities;
 using Proyecto_Progra_MVC.Domain.Models.Enum;
 using Proyecto_Progra_MVC.Domain.Models.ViewModels;
@@ -24,6 +26,7 @@ namespace Proyecto_Progra_MVC.Controllers
         readonly IRepository<Info> _repository;
         readonly IRepository<User> _userManager;
 
+        [Authorize(Policy = PermissionTypesNames.VIEWROLES)]
         public IActionResult Index(string id)
         {
             List<Info> model = new List<Info>();
@@ -50,7 +53,7 @@ namespace Proyecto_Progra_MVC.Controllers
             return View(infoViewModel);
         }
 
-
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         [HttpGet]
         public IActionResult InfoRegister(string id)
         {
@@ -61,6 +64,7 @@ namespace Proyecto_Progra_MVC.Controllers
             return View(info);
         }
 
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult InfoRegister(Info info)
@@ -79,6 +83,7 @@ namespace Proyecto_Progra_MVC.Controllers
             return View(info);
         }
 
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         [HttpGet]
         public IActionResult Update(int id)
         {
@@ -90,6 +95,7 @@ namespace Proyecto_Progra_MVC.Controllers
             return View(info);
         }
 
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Update(Info info)
@@ -106,6 +112,7 @@ namespace Proyecto_Progra_MVC.Controllers
             return View(info);
         }
 
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         [HttpDelete]
         public IActionResult Delete(int id)
         {
@@ -122,6 +129,7 @@ namespace Proyecto_Progra_MVC.Controllers
             return Json(new { success = true, message = "Information successfully removed." });
         }
 
+        [Authorize(Policy = PermissionTypesNames.VIEWROLES)]
         [HttpGet]
         public IActionResult Calculate(int id)
         {

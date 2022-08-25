@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Proyecto_Progra_MVC.Components;
 using Proyecto_Progra_MVC.Contracts;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Proyecto_Progra_MVC.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public HomeController(ILogger<HomeController> logger, ICartero cartero)

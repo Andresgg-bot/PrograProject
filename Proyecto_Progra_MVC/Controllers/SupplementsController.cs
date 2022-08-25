@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Mvc;
 using Proyecto_Progra_MVC.Infraestructure.Repository.UnitOfWork;
 using Proyecto_Progra_MVC.Infraestructure.Data;
 using Proyecto_Progra_MVC.Infraestructure.Repository;
+using Microsoft.AspNetCore.Authorization;
+using Proyecto_Progra_MVC.Application.Handlers;
 
 namespace Proyecto_Progra_MVC.Controllers
 {
@@ -27,12 +29,14 @@ namespace Proyecto_Progra_MVC.Controllers
         readonly ISupplementsServices _services;
         readonly IWebHostEnvironment _hostEnvironment;
 
+        [Authorize(Policy = PermissionTypesNames.VIEWROLES)]
         public async Task<IActionResult> Index()
         {
             var supplements = await _services.getSupplementsAsync();
             return View(supplements);
         }
 
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         [HttpGet]
         public async Task<IActionResult> Upsert(int? id)
         {
@@ -49,6 +53,7 @@ namespace Proyecto_Progra_MVC.Controllers
             }
         }
 
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Upsert(Supplements model, IFormFile? file)
@@ -93,6 +98,7 @@ namespace Proyecto_Progra_MVC.Controllers
             return View(model);
         }
 
+        [Authorize(Policy = PermissionTypesNames.WRITEROLES)]
         [HttpDelete]
         public async Task<IActionResult> DeleteSupplement(int id)
         {
