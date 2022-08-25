@@ -29,7 +29,8 @@ namespace Proyecto_Progra_MVC.Controllers
         readonly ISupplementsServices _services;
         readonly IWebHostEnvironment _hostEnvironment;
 
-        [Authorize(Policy = PermissionTypesNames.VIEWROLES)]
+        //[Authorize(Policy = PermissionTypesNames.VIEWROLES)]
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var supplements = await _services.getSupplementsAsync();
