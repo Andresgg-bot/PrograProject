@@ -735,3 +735,4 @@ $RECYCLE.BIN/
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/csharp,aspnetcore,dotnetcore,visualstudio,windows
+/Proyecto_Progra_MVC.Infraestructure/Migrations
