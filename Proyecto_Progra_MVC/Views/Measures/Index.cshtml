@@ -57,7 +57,7 @@
                                     <td>
                                         <div class="text-center">
                                             @inject IAuthorizationService _authorizationService
-                                            @if ((await _authorizationService.AuthorizeAsync(User, PermissionTypesNames.WRITEROLES)).Succeeded)
+                                            @if ((await _authorizationService.AuthorizeAsync(User, PermissionTypesNames.MANAGEROLES)).Succeeded)
                                             {
                                                 <a href="/measures/update/@measure.IdMeasure" class="btn btn-warning text-white" style="cursor:pointer">
                                                     <i class="fas fa-edit"></i>

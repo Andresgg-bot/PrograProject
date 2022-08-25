@@ -1,4 +1,6 @@
-﻿@model List<Supplements>
+﻿@using Proyecto_Progra_MVC.Application.Handlers
+@using Microsoft.AspNetCore.Authorization
+@model List<Supplements>
 
 <section class="class-timetable-section spad">
     <div class="container">
@@ -7,7 +9,8 @@
                 <h2>Supplements list</h2>
             </div>
         </div>
-        @if (User.IsInRole("Administrators"))
+        @inject IAuthorizationService _authorizationService
+        @if ((await _authorizationService.AuthorizeAsync(User, PermissionTypesNames.WRITEROLES)).Succeeded)
         {
             <div class="col-12 text-right">
                 <a href="/supplements/upsert/" class="btn btn-outline-light">
@@ -28,8 +31,12 @@
                                 <th>Description</th>
                                 <th>Price</th>
                                 <th>Photo</th>
-                                <th>Actions</th>
+                                @inject IAuthorizationService _authorizationService
+                                @if ((await _authorizationService.AuthorizeAsync(User, PermissionTypesNames.WRITEROLES)).Succeeded)
+                                {
+                                    <th>Actions</th>
 
+                                }
                             </tr>
                         </thead>
                         <tbody>
@@ -40,16 +47,20 @@
                                     <td><p>@supplements.Description</p></td>
                                     <td><p>@supplements.Price</p></td>
                                     <td><img src="@supplements.Photo" alt="" width="100"></td>
-                                    <td>
-                                        <div class="text-center">
-                                            <a href="/supplements/upsert/@supplements.Id" class="btn btn-outline-light" style="cursor:pointer">
-                                                <i class="fa-solid fa-pen-to-square"></i>
-                                            </a>
-                                            <a onclick=Delete("@supplements.Id") class="btn btn-outline-danger" style="cursor:pointer">
-                                                <i class="fa-solid fa-trash" style="color:white" ;></i>
-                                            </a>
-                                        </div>
-                                    </td>
+
+                                    @if ((await _authorizationService.AuthorizeAsync(User, PermissionTypesNames.WRITEROLES)).Succeeded)
+                                    {
+                                        <td>
+                                            <div class="text-center">
+                                                <a href="/supplements/upsert/@supplements.Id" class="btn btn-outline-light" style="cursor:pointer">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a>
+                                                <a onclick=Delete("@supplements.Id") class="btn btn-outline-danger" style="cursor:pointer">
+                                                    <i class="fa-solid fa-trash" style="color:white" ;></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    }
                                 </tr>
                             }
                         </tbody>
@@ -71,12 +82,12 @@
             cancelButtonColor: '#d33',
             confirmButtonText: 'Accept',
             cancelButtonText: 'Canel'
-            }).then((result) => {
+        }).then((result) => {
             if (result) {
                 $.ajax({
                     type: "DELETE",
                     url: "/Supplements/deleteSupplement/" + id,
-                    success: function (response) {
+                    success: function(response) {
                         if (response.success) {
                             toastr.success(data.message);
                             $("#supplement_" + id).remove();

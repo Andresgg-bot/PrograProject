@@ -8,6 +8,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Proyecto_Progra_MVC.Services.IServices;
+using Microsoft.AspNetCore.Authorization;
+using Proyecto_Progra_MVC.Application.Handlers;
 
 namespace Proyecto_Progra_MVC.Controllers
 {
@@ -25,7 +27,7 @@ namespace Proyecto_Progra_MVC.Controllers
         readonly IRepository<User> _userManger;
         readonly IUserServices _services;
 
-
+        [Authorize(Policy = PermissionTypesNames.VIEWROLES)]
         public async Task<IActionResult> Index()
         {
             var users = await _services.getUsersAsync();
@@ -42,6 +44,7 @@ namespace Proyecto_Progra_MVC.Controllers
             return View(user);
         }
 
+        [Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
         [HttpGet]
         public async Task<IActionResult> UpdateUser(string id)
         {
@@ -61,6 +64,7 @@ namespace Proyecto_Progra_MVC.Controllers
             return View(users);
         }
 
+        [Authorize(Policy = PermissionTypesNames.MANAGEROLES)]
         [HttpPost]
         public async Task<IActionResult> UpdateUser(User users)
         {
